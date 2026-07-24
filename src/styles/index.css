@@ -1,0 +1,68 @@
+/**
+ * LUMINA — Enterprise Design System
+ * Premium Beauty & Cosmetics Ecommerce Platform
+ * 
+ * This is the single entry point for the entire design system.
+ * Import order is CRITICAL for proper cascade and overrides.
+ * 
+ * IMPORT ORDER PHILOSOPHY:
+ * 1. Reset — Remove browser defaults (first)
+ * 2. Tokens — Foundational design tokens (colors, typography, spacing etc.)
+ * 3. Themes — Light/Dark semantic tokens (override base tokens)
+ * 4. Base — HTML element defaults using tokens
+ * 5. Utilities — Low-level utility classes
+ * 6. Commerce — Commerce-specific utilities
+ * 7. Animations — Motion tokens and keyframe definitions
+ * 
+ * NEVER import component styles here. Components use tokens only.
+ * All values MUST come from CSS custom properties defined in tokens.
+ */
+
+@import "./reset.css";
+@import "./base/fonts.css";
+@import "./tokens/colors.css";
+@import "./tokens/semantic-colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+@import "./tokens/shadows.css";
+@import "./tokens/borders.css";
+@import "./tokens/opacity.css";
+@import "./tokens/motion.css";
+@import "./tokens/transitions.css";
+@import "./tokens/z-index.css";
+@import "./tokens/breakpoints.css";
+@import "./tokens/layout.css";
+@import "./tokens/containers.css";
+@import "./tokens/icons.css";
+@import "./tokens/blur.css";
+
+@import "./themes/theme.css";
+@import "./themes/light.css";
+@import "./themes/dark.css";
+
+@import "./base.css";
+
+
+@import "./utilities.css";
+@import "./utilities/display.css";
+@import "./utilities/flex.css";
+@import "./utilities/grid.css";
+@import "./utilities/position.css";
+@import "./utilities/sizing.css";
+@import "./utilities/text.css";
+@import "./utilities/overflow.css";
+@import "./utilities/visibility.css";
+@import "./utilities/effects.css";
+
+@import "./layouts.css";
+@import "./commerce.css";
+@import "./animations.css";
+
+/* 
+ * Final override layer for any theme-specific or brand-specific 
+ * adjustments that must win. Keep this minimal.
+ */
+:root {
+  color-scheme: light;
+}

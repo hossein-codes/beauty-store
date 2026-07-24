@@ -1,0 +1,157 @@
+/**
+ * LUMINA Design System — Layout Utilities
+ *
+ * High-level layout patterns.
+ *
+ * Used for:
+ * - Ecommerce pages
+ * - Product listings
+ * - Mobile PWA screens
+ * - Content layouts
+ *
+ * All values come from tokens.
+ */
+
+/* ============================================
+   CONTAINER SYSTEM
+   ============================================ */
+
+.container {
+  width: 100%;
+
+  max-width: var(--container-content-max);
+
+  margin-inline: auto;
+
+  padding-inline: var(--spacing-page-x);
+}
+
+.container-commerce {
+  width: 100%;
+
+  max-width: var(--container-commerce);
+
+  margin-inline: auto;
+
+  padding-inline: var(--spacing-page-x);
+}
+
+.container-reading {
+  width: 100%;
+
+  max-width: var(--container-reading);
+
+  margin-inline: auto;
+}
+
+/* ============================================
+   PAGE STRUCTURE
+   ============================================ */
+
+.page {
+  min-height: 100vh;
+
+  min-height: 100dvh;
+
+  padding-top: var(--spacing-32);
+
+  padding-bottom: var(--spacing-64);
+}
+
+.page-centered {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+.section {
+  padding-block: var(--spacing-section);
+}
+
+.section-sm {
+  padding-block: var(--spacing-32);
+}
+
+.section-lg {
+  padding-block: var(--spacing-64);
+}
+
+/* ============================================
+   PRODUCT GRID
+   ============================================ */
+
+.product-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: var(--spacing-16);
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: var(--spacing-20);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: var(--spacing-24);
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ============================================
+   MOBILE APP LAYOUT
+   ============================================ */
+
+.app-shell {
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+
+  overflow-y: auto;
+}
+
+/* ============================================
+   COMMON STACK PATTERNS
+   ============================================ */
+
+.stack {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.stack-center {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+}

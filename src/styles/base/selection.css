@@ -1,0 +1,47 @@
+/**
+ * LUMINA — Base: Text Selection
+ *
+ * Global text selection styling.
+ *
+ * Supports:
+ * - Light theme
+ * - Dark theme
+ * - Firefox
+ * - Commerce UI
+ */
+
+/* ============================================
+   GLOBAL SELECTION
+   ============================================ */
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+
+  color: var(--text-primary);
+}
+
+/* Firefox Support */
+
+::-moz-selection {
+  background-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+
+  color: var(--text-primary);
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+input::selection,
+textarea::selection {
+  background-color: color-mix(in srgb, var(--color-secondary) 35%, transparent);
+}
+
+/* ============================================
+   CODE / TECH CONTENT
+   ============================================ */
+
+code::selection,
+pre::selection {
+  background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+}

@@ -1,0 +1,54 @@
+/**
+ * LUMINA — Base: HTML
+ *
+ * Global document foundation.
+ *
+ * Handles:
+ * - Font system
+ * - Direction support
+ * - Rendering quality
+ * - Theme background
+ * - Smooth scrolling
+ */
+
+html {
+  font-size: 16px;
+
+  font-family: var(--font-family-sans);
+
+  line-height: var(--line-height-normal);
+
+  background-color: var(--surface-background);
+
+  color: var(--text-primary);
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+  scroll-behavior: smooth;
+
+  overflow-x: hidden;
+}
+
+/* ============================================
+   RTL MODE
+   ============================================ */
+
+html[dir="rtl"] {
+  font-family: var(--font-family-persian);
+
+  direction: rtl;
+}
+
+/* ============================================
+   LTR MODE
+   ============================================ */
+
+html[dir="ltr"] {
+  font-family: var(--font-family-sans);
+
+  direction: ltr;
+}

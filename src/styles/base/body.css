@@ -1,0 +1,18 @@
+/**
+ * LUMINA — Base: Body
+ */
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-body-md);
+  line-height: var(--line-height-normal);
+  background-color: var(--surface-background);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-family-persian);
+}
+body {
+  outline: 10px solid red !important;
+}

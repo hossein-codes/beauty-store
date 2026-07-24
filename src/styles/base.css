@@ -1,0 +1,69 @@
+/**
+ * LUMINA Design System — Base Layer Aggregator
+ *
+ * PURPOSE:
+ * Central entry point for all native HTML element styling.
+ *
+ * RESPONSIBILITY:
+ * - Apply design tokens to browser elements
+ * - Normalize UI behavior
+ * - Provide consistent foundation
+ *
+ * IMPORTANT:
+ * Components MUST NOT import these files directly.
+ * They are loaded through index.css only.
+ *
+ * ORDER MATTERS:
+ *
+ * 1. HTML root configuration
+ * 2. Body foundation
+ * 3. Typography system
+ * 4. Links
+ * 5. Forms
+ * 6. Media elements
+ * 7. Selection
+ * 8. Scrollbar
+ * 9. Accessibility
+ */
+
+/* ============================================
+   DOCUMENT FOUNDATION
+   ============================================ */
+
+@import "./base/html.css";
+
+@import "./base/body.css";
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+@import "./base/typography.css";
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
+
+@import "./base/links.css";
+
+@import "./base/forms.css";
+
+/* ============================================
+   MEDIA
+   ============================================ */
+
+@import "./base/images.css";
+
+/* ============================================
+   UX ENHANCEMENTS
+   ============================================ */
+
+@import "./base/selection.css";
+
+@import "./base/scrollbar.css";
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@import "./base/accessibility.css";

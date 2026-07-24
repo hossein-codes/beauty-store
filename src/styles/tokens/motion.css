@@ -1,0 +1,26 @@
+/**
+ * LUMINA Design System — Motion & Animation Tokens
+ * 
+ * Max duration 200ms.
+ * Only fade, scale, slide, opacity, transform.
+ */
+
+:root {
+  /* Durations */
+  --motion-duration-fast: 100ms;
+  --motion-duration-normal: 150ms;
+  --motion-duration-slow: 200ms;
+  --motion-duration-extra-slow: 300ms; /* Use sparingly */
+
+  /* Easing */
+  --motion-ease-linear: linear;
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Common motion curves for UX */
+  --motion-ease-standard: var(--motion-ease-out);
+  --motion-ease-emphasized: var(--motion-ease-in-out);
+  --motion-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --motion-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+}

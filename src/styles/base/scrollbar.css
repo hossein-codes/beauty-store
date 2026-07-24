@@ -1,0 +1,75 @@
+/**
+ * LUMINA — Base: Scrollbar
+ *
+ * Premium subtle scrollbar.
+ *
+ * Supports:
+ * - Desktop ecommerce
+ * - Dark / Light themes
+ * - Chromium browsers
+ * - Firefox
+ */
+
+/* ============================================
+   FIREFOX
+   ============================================ */
+
+html {
+  scrollbar-width: thin;
+
+  scrollbar-color: var(--border-strong) var(--surface-surface);
+}
+
+/* ============================================
+   WEBKIT
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+
+  border-radius: var(--radius-full);
+
+  transition: background-color var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ============================================
+   DARK THEME
+   ============================================ */
+
+html.dark::-webkit-scrollbar-track,
+html[data-theme="dark"]::-webkit-scrollbar-track {
+  background: var(--surface-background);
+}
+
+html.dark::-webkit-scrollbar-thumb,
+html[data-theme="dark"]::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+}
+
+/* ============================================
+   MOBILE / PWA
+   ============================================ */
+
+@media (max-width: 768px) {
+  html {
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}

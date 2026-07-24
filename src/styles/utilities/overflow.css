@@ -1,0 +1,113 @@
+/**
+ * LUMINA — Overflow Utilities
+ *
+ * Used for:
+ * - Product sliders
+ * - Modals
+ * - Mobile screens
+ * - Horizontal commerce lists
+ */
+
+/* ============================================
+   OVERFLOW
+   ============================================ */
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+/* ============================================
+   AXIS CONTROL
+   ============================================ */
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+/* ============================================
+   SCROLL BEHAVIOR
+   ============================================ */
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.scroll-auto {
+  scroll-behavior: auto;
+}
+
+/* ============================================
+   MOBILE TOUCH SCROLL
+   ============================================ */
+
+.touch-pan-x {
+  touch-action: pan-x;
+}
+
+.touch-pan-y {
+  touch-action: pan-y;
+}
+
+.touch-none {
+  touch-action: none;
+}
+
+/* ============================================
+   OVERSCROLL
+   ============================================ */
+
+.overscroll-auto {
+  overscroll-behavior: auto;
+}
+
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
+.overscroll-none {
+  overscroll-behavior: none;
+}
+
+/* ============================================
+   SCROLLBAR HELPERS
+   ============================================ */
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

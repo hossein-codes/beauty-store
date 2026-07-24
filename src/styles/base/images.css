@@ -1,0 +1,121 @@
+/**
+ * LUMINA — Base: Images
+ *
+ * Global image foundation.
+ *
+ * Used for:
+ * - Product images
+ * - Product gallery
+ * - Banners
+ * - Brand logos
+ * - User avatars
+ * - Next/Image
+ */
+
+/* ============================================
+   DEFAULT IMAGE
+   ============================================ */
+
+img {
+  display: block;
+
+  max-width: 100%;
+
+  height: auto;
+
+  object-fit: cover;
+
+  border-radius: var(--radius-md);
+}
+
+/* ============================================
+   IMAGE LOADING
+   ============================================ */
+
+img[loading="lazy"] {
+  opacity: 0;
+
+  transition: opacity var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ============================================
+   PRODUCT IMAGES
+   ============================================ */
+
+.product-image {
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border-radius: var(--radius-card);
+}
+
+/* ============================================
+   PRODUCT GALLERY
+   ============================================ */
+
+.product-gallery-image {
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+}
+
+/* ============================================
+   BANNER IMAGES
+   ============================================ */
+
+.banner-image {
+  width: 100%;
+
+  aspect-ratio: 16 / 7;
+
+  object-fit: cover;
+
+  border-radius: var(--radius-xl);
+}
+
+/* ============================================
+   AVATAR / SMALL IMAGES
+   ============================================ */
+
+.avatar-image {
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 999px;
+
+  object-fit: cover;
+}
+
+/* ============================================
+   IMAGE PLACEHOLDER
+   ============================================ */
+
+.image-placeholder {
+  background: var(--surface-elevated);
+
+  border-radius: var(--radius-md);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+img {
+  user-select: none;
+}
+
+/* ============================================
+   RTL SAFE
+   ============================================ */
+
+html[dir="rtl"] img {
+  transform: none;
+}

@@ -1,0 +1,142 @@
+/**
+ * LUMINA — Sizing Utilities
+ *
+ * Size helpers powered by layout tokens.
+ *
+ * Used for:
+ * - Product cards
+ * - Images
+ * - Containers
+ * - Mobile app screens
+ * - Commerce layouts
+ */
+
+/* ============================================
+   WIDTH
+   ============================================ */
+
+.w-full {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
+.max-w-content {
+  max-width: var(--container-content-max);
+}
+
+.max-w-reading {
+  max-width: var(--container-reading);
+}
+
+.max-w-commerce {
+  max-width: var(--container-commerce);
+}
+
+/* ============================================
+   HEIGHT
+   ============================================ */
+
+.h-full {
+  height: 100%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-h-dvh {
+  min-height: 100dvh;
+}
+
+/* ============================================
+   MIN / MAX SIZE
+   ============================================ */
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.min-h-0 {
+  min-height: 0;
+}
+
+.max-h-full {
+  max-height: 100%;
+}
+
+/* ============================================
+   ASPECT RATIO
+   ============================================ */
+
+.aspect-auto {
+  aspect-ratio: auto;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-\[4\/3\] {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-\[3\/4\] {
+  aspect-ratio: 3 / 4;
+}
+
+/* Beauty product standard */
+
+.aspect-product {
+  aspect-ratio: 1 / 1;
+}
+
+/* ============================================
+   OBJECT FIT
+   ============================================ */
+
+.object-cover {
+  object-fit: cover;
+}
+
+.object-contain {
+  object-fit: contain;
+}
+
+.object-fill {
+  object-fit: fill;
+}
+
+.object-none {
+  object-fit: none;
+}

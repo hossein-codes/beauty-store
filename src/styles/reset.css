@@ -1,0 +1,113 @@
+/**
+ * LUMINA Design System — Reset Layer
+ * 
+ * Purpose: Remove browser defaults while preserving accessibility.
+ * This ensures consistent foundation across all browsers and devices.
+ * 
+ * Philosophy: Start from zero. Every visual decision must come from tokens.
+ * Do not rely on user-agent styles.
+ * 
+ * WCAG AA compliance: Preserve focus outlines (handled in accessibility.css)
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent text size adjust on mobile */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth scrolling for internal links */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Prevent horizontal scroll by default */
+  overflow-x: hidden;
+  /* Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default link styles - semantic handled in base/links.css */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Make images and media responsive by default */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Inherit fonts properly for form elements */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove default button styles */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Better table defaults */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Remove default search input decorations */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+/* Consistent placeholder styling (tokens override color) */
+::placeholder {
+  opacity: 1;
+}
+
+/* Remove default focus ring — we provide our own via tokens */
+:focus-visible {
+  outline: none;
+}
+
+/* Respect user reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

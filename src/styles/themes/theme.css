@@ -1,0 +1,89 @@
+/**
+ * LUMINA Design System — Theme Base
+ *
+ * PURPOSE:
+ * Central theme controller.
+ *
+ * Supports:
+ * - Light mode
+ * - Dark mode
+ * - PWA
+ * - Mobile App
+ * - Smooth theme transition
+ *
+ * Theme switching:
+ * html[data-theme="dark"]
+ * html.dark
+ */
+
+/* ============================================
+   DEFAULT THEME CONFIG
+   ============================================ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Theme transition */
+
+  --theme-transition:
+    background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  /* Global UI behavior */
+
+  --theme-radius: 16px;
+
+  --theme-focus-ring: 0 0 0 3px rgba(92, 143, 232, 0.25);
+
+  /* Overlay */
+
+  --theme-overlay: rgba(0, 0, 0, 0.45);
+
+  /* Selection */
+
+  --theme-selection-bg: var(--color-primary-200);
+
+  --theme-selection-text: var(--color-gray-950);
+}
+
+/* ============================================
+   LIGHT MODE DEFAULT
+   ============================================ */
+
+html {
+  color-scheme: light;
+
+  background: var(--surface-background);
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+}
+
+/* ============================================
+   SMOOTH THEME CHANGE
+   ============================================ */
+
+body,
+button,
+input,
+textarea,
+select,
+article,
+section,
+div {
+  transition: var(--theme-transition);
+}
+
+/* ============================================
+   PREVENT FLASH DURING THEME LOAD
+   ============================================ */
+
+html.theme-loading * {
+  transition: none !important;
+}

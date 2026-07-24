@@ -1,0 +1,199 @@
+/**
+ * LUMINA Design System — Animation & Motion
+ *
+ * Premium micro interactions.
+ *
+ * Rules:
+ * - Fast (<200ms)
+ * - Transform + opacity only
+ * - Respect reduced motion
+ */
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+
+    transform: translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   ANIMATION CLASSES
+   ============================================ */
+
+.fade-in {
+  animation: fadeIn var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.fade-out {
+  animation: fadeOut var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.scale-in {
+  animation: scaleIn var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.slide-up {
+  animation: slideUp var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.slide-down {
+  animation: slideDown var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.slide-left {
+  animation: slideLeft var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+.slide-right {
+  animation: slideRight var(--motion-duration-normal) var(--motion-ease-out)
+    forwards;
+}
+
+/* ============================================
+   INTERACTION MOTION
+   ============================================ */
+
+.btn-press {
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.btn-press:active {
+  transform: scale(0.985);
+}
+
+/* Premium hover */
+
+.hover-lift {
+  transition:
+    transform var(--motion-duration-normal) var(--motion-ease-out),
+    box-shadow var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* Product image hover */
+
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+.image-zoom:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

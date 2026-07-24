@@ -1,0 +1,160 @@
+/**
+ * LUMINA — Flex Utilities
+ *
+ * Token-friendly flex helpers.
+ *
+ * Used for:
+ * - Navbar
+ * - Product cards
+ * - Cart items
+ * - Checkout
+ * - Mobile navigation
+ */
+
+/* ============================================
+   DIRECTION
+   ============================================ */
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* ============================================
+   WRAP
+   ============================================ */
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* ============================================
+   ALIGN ITEMS
+   ============================================ */
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+/* ============================================
+   JUSTIFY CONTENT
+   ============================================ */
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* ============================================
+   ALIGN SELF
+   ============================================ */
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+/* ============================================
+   FLEX GROW / SHRINK
+   ============================================ */
+
+.grow {
+  flex-grow: 1;
+}
+
+.grow-0 {
+  flex-grow: 0;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FLEX BASIS
+   ============================================ */
+
+.basis-auto {
+  flex-basis: auto;
+}
+
+.basis-full {
+  flex-basis: 100%;
+}
+
+/* ============================================
+   COMMON APP PATTERNS
+   ============================================ */
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-none {
+  flex: none;
+}

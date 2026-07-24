@@ -1,0 +1,13 @@
+/**
+ * LUMINA Design System — Transition Tokens
+ */
+:root {
+  --transition-fast: all var(--motion-duration-fast) var(--motion-ease-out);
+  --transition-normal: all var(--motion-duration-normal) var(--motion-ease-out);
+  --transition-slow: all var(--motion-duration-slow) var(--motion-ease-out);
+
+  --transition-colors: color, background-color, border-color var(--motion-duration-normal) var(--motion-ease-out);
+  --transition-opacity: opacity var(--motion-duration-normal) var(--motion-ease-out);
+  --transition-transform: transform var(--motion-duration-normal) var(--motion-ease-out);
+  --transition-shadow: box-shadow var(--motion-duration-normal) var(--motion-ease-out);
+}

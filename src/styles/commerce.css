@@ -1,0 +1,247 @@
+/**
+ * LUMINA Design System — Commerce Styles
+ *
+ * Commerce utility patterns.
+ *
+ * Focus:
+ * - Product discovery
+ * - Conversion
+ * - Trust
+ * - Mobile commerce
+ *
+ * Not components.
+ * All values come from tokens.
+ */
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+
+.commerce-product-image {
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background-color: var(--surface-surface);
+
+  border: 1px solid var(--border-card);
+
+  border-radius: var(--radius-card);
+}
+
+/* ============================================
+   PRODUCT CARD
+   ============================================ */
+
+.product-card {
+  position: relative;
+
+  transition: var(--transition-normal);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   PRICE SYSTEM
+   ============================================ */
+
+.commerce-price {
+  font-size: var(--font-body-lg);
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--color-price);
+}
+
+.commerce-price-old {
+  font-size: var(--font-body-sm);
+
+  color: var(--color-old-price);
+
+  text-decoration: line-through;
+
+  margin-inline-start: var(--spacing-8);
+}
+
+.commerce-price-discount {
+  font-size: var(--font-body-lg);
+
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-discount);
+}
+
+.commerce-price-unit {
+  font-size: var(--font-caption);
+
+  color: var(--text-muted);
+}
+
+/* ============================================
+   DISCOUNT / PRODUCT BADGES
+   ============================================ */
+
+.product-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: var(--spacing-4) var(--spacing-8);
+
+  font-size: var(--font-caption);
+
+  font-weight: var(--font-weight-medium);
+
+  border-radius: var(--radius-full);
+}
+
+.badge-discount {
+  color: var(--color-error-700);
+
+  background: var(--color-error-100);
+}
+
+.badge-new {
+  color: var(--color-primary-700);
+
+  background: var(--color-primary-100);
+}
+
+.badge-best {
+  color: var(--color-warning-700);
+
+  background: var(--color-warning-100);
+}
+
+/* ============================================
+   STOCK STATES
+   ============================================ */
+
+.stock-available {
+  color: var(--color-stock-available);
+}
+
+.stock-low {
+  color: var(--color-stock-low);
+}
+
+.stock-out {
+  color: var(--color-stock-out);
+}
+
+/* ============================================
+   RATING
+   ============================================ */
+
+.product-rating {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: var(--spacing-4);
+
+  font-size: var(--font-caption);
+
+  color: var(--text-muted);
+}
+
+/* ============================================
+   TRUST SIGNALS
+   ============================================ */
+
+.trust-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: var(--spacing-8);
+
+  padding: var(--spacing-4) var(--spacing-12);
+
+  font-size: var(--font-caption);
+
+  color: var(--text-muted);
+
+  background: var(--surface-surface);
+
+  border: 1px solid var(--border-subtle);
+
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   QUICK ACTIONS
+   ============================================ */
+
+.quick-action {
+  opacity: 0;
+
+  transition: var(--transition-fast);
+}
+
+.product-card:hover .quick-action,
+.product-card:focus-within .quick-action {
+  opacity: 1;
+}
+
+/* Mobile always accessible */
+
+@media (max-width: 768px) {
+  .quick-action {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   WISHLIST
+   ============================================ */
+
+.wishlist-btn {
+  position: absolute;
+
+  top: var(--spacing-12);
+
+  inset-inline-end: var(--spacing-12);
+
+  z-index: var(--z-dropdown);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: var(--spacing-8);
+
+  background: var(--surface-floating);
+
+  border-radius: var(--radius-full);
+
+  box-shadow: var(--shadow-sm);
+
+  transition: var(--transition-fast);
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   CART ACTION
+   ============================================ */
+
+.add-cart-action {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: var(--spacing-8);
+}

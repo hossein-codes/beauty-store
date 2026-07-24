@@ -1,0 +1,17 @@
+/**
+ * LUMINA Design System — Icon Tokens
+ */
+:root {
+  --icon-size-16: 1rem;
+  --icon-size-20: 1.25rem;
+  --icon-size-24: 1.5rem;
+  --icon-size-28: 1.75rem;
+  --icon-size-32: 2rem;
+  --icon-size-40: 2.5rem;
+  --icon-size-48: 3rem;
+  --icon-size-56: 3.5rem;
+  --icon-size-64: 4rem;
+
+  --icon-stroke-width: 1.5;
+  --icon-stroke-width-thick: 2;
+}

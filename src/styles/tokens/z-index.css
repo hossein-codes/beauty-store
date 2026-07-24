@@ -1,0 +1,15 @@
+/**
+ * LUMINA Design System — Z-Index Tokens
+ */
+:root {
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-header: 1200;
+  --z-drawer: 1300;
+  --z-overlay: 1400;
+  --z-modal: 1500;
+  --z-toast: 1600;
+  --z-tooltip: 1700;
+  --z-notification: 1800;
+}

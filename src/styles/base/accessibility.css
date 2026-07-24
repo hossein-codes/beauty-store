@@ -1,0 +1,111 @@
+/**
+ * LUMINA — Base: Accessibility
+ *
+ * Accessibility foundation.
+ *
+ * Includes:
+ * - WCAG AA focus states
+ * - Keyboard navigation
+ * - Skip navigation
+ * - Reduced motion
+ * - High contrast support
+ */
+
+/* ============================================
+   FOCUS STATES
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+
+  outline-offset: 3px;
+
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   SKIP LINK
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+
+  top: -100%;
+
+  left: var(--space-4);
+
+  z-index: var(--z-notification);
+
+  padding: var(--space-3) var(--space-6);
+
+  background: var(--surface-modal);
+
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-primary);
+
+  border-radius: var(--radius-md);
+
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ============================================
+   KEYBOARD ONLY ELEMENTS
+   ============================================ */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+
+  outline-offset: 3px;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST
+   ============================================ */
+
+@media (prefers-contrast: more) {
+  :root {
+    --border-primary: var(--color-gray-700);
+
+    --border-focus: var(--color-secondary-700);
+
+    --text-secondary: var(--color-gray-800);
+  }
+}
+
+/* ============================================
+   MOTION SAFE
+   ============================================ */
+
+@media (hover: none) {
+  button:hover,
+  a:hover {
+    opacity: 1;
+  }
+}

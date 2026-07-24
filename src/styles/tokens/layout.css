@@ -1,0 +1,8 @@
+/**
+ * LUMINA Design System — Layout Tokens
+ */
+:root {
+  --layout-gutter: var(--spacing-24);
+  --layout-gutter-sm: var(--spacing-16);
+  --layout-gutter-lg: var(--spacing-32);
+}

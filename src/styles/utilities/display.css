@@ -1,0 +1,111 @@
+/**
+ * LUMINA — Display Utilities
+ *
+ * Low-level display helpers.
+ *
+ * Used for:
+ * - Layouts
+ * - Product grids
+ * - Navigation
+ * - Mobile app screens
+ */
+
+/* ============================================
+   DISPLAY TYPES
+   ============================================ */
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.inline-grid {
+  display: inline-grid;
+}
+
+.table {
+  display: table;
+}
+
+.contents {
+  display: contents;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ============================================
+   VISIBILITY
+   ============================================ */
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+
+  height: 1px;
+
+  padding: 0;
+
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+}
+
+/* Restore screen reader hidden element */
+
+.not-sr-only {
+  position: static;
+
+  width: auto;
+
+  height: auto;
+
+  padding: initial;
+
+  margin: initial;
+
+  overflow: visible;
+
+  clip: auto;
+
+  white-space: normal;
+}

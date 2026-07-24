@@ -1,0 +1,138 @@
+/**
+ * LUMINA — Grid Utilities
+ *
+ * Mobile first commerce grid system.
+ *
+ * Used for:
+ * - Product listing
+ * - Categories
+ * - Brand sections
+ * - Admin dashboard
+ * - Mobile app layouts
+ */
+
+/* ============================================
+   GRID DISPLAY
+   ============================================ */
+
+.grid {
+  display: grid;
+}
+
+/* ============================================
+   COLUMNS
+   ============================================ */
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* ============================================
+   AUTO RESPONSIVE GRID
+   ============================================ */
+
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* ============================================
+   COLUMN SPAN
+   ============================================ */
+
+.col-span-1 {
+  grid-column: span 1;
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   ALIGNMENT
+   ============================================ */
+
+.place-center {
+  place-items: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-items-center {
+  justify-items: center;
+}

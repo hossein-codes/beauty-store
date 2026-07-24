@@ -1,0 +1,196 @@
+/**
+ * LUMINA — Base: Forms
+ *
+ * Global form foundation.
+ *
+ * Used for:
+ * - Search
+ * - Authentication
+ * - Checkout
+ * - Address forms
+ * - Filters
+ * - Contact forms
+ *
+ * All styles use design tokens only.
+ */
+
+/* ============================================
+   INPUT ELEMENTS
+   ============================================ */
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  font-size: var(--font-input);
+
+  line-height: var(--line-height-normal);
+
+  font-family: inherit;
+
+  background-color: var(--surface-input);
+
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-input);
+
+  border-radius: var(--radius-input);
+
+  padding: var(--space-3) var(--space-4);
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+
+  outline: none;
+}
+
+/* ============================================
+   PLACEHOLDER
+   ============================================ */
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+
+  opacity: 1;
+}
+
+/* ============================================
+   HOVER
+   ============================================ */
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--border-strong);
+}
+
+/* ============================================
+   FOCUS
+   ============================================ */
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--border-input-focus);
+
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-focus) 15%, transparent);
+}
+
+/* ============================================
+   DISABLED
+   ============================================ */
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--surface-input-disabled);
+
+  color: var(--text-disabled);
+
+  cursor: not-allowed;
+
+  opacity: var(--opacity-disabled);
+}
+
+/* ============================================
+   TEXTAREA
+   ============================================ */
+
+textarea {
+  resize: vertical;
+
+  min-height: 120px;
+}
+
+/* ============================================
+   SELECT
+   ============================================ */
+
+select {
+  cursor: pointer;
+}
+
+/* ============================================
+   CHECKBOX + RADIO
+   ============================================ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1rem;
+
+  height: 1rem;
+
+  padding: 0;
+
+  accent-color: var(--color-primary);
+
+  cursor: pointer;
+}
+
+/* ============================================
+   BUTTON FOUNDATION
+   ============================================ */
+
+button {
+  font-family: inherit;
+
+  font-size: var(--font-button);
+
+  font-weight: var(--font-weight-medium);
+
+  line-height: var(--line-height-none);
+
+  border-radius: var(--radius-button);
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+/* ============================================
+   BUTTON STATES
+   ============================================ */
+
+button:hover {
+  opacity: 0.92;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  cursor: not-allowed;
+
+  opacity: var(--opacity-disabled);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--border-focus);
+
+  outline-offset: 2px;
+}
+
+/* ============================================
+   RTL
+   ============================================ */
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+  text-align: right;
+}

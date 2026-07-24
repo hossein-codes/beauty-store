@@ -1,0 +1,97 @@
+/**
+ * LUMINA — Visibility Utilities
+ *
+ * Used for:
+ * - Loading states
+ * - Disabled UI
+ * - Modal overlays
+ * - Animations
+ * - Interactive states
+ */
+
+/* ============================================
+   VISIBILITY
+   ============================================ */
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* ============================================
+   OPACITY
+   ============================================ */
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-10 {
+  opacity: 0.1;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+/* ============================================
+   INTERACTION STATES
+   ============================================ */
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+/* ============================================
+   DISABLED STATE
+   ============================================ */
+
+.disabled {
+  opacity: var(--opacity-disabled);
+  pointer-events: none;
+}
+
+/* ============================================
+   TRANSITION FRIENDLY
+   ============================================ */
+
+.fade-in {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}

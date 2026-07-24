@@ -1,0 +1,128 @@
+/**
+ * LUMINA — Light Theme
+ *
+ * Default theme.
+ *
+ * Style:
+ * - Premium beauty ecommerce
+ * - Soft
+ * - Clean
+ * - Trust focused
+ *
+ * Applied when:
+ * :root
+ * html:not([data-theme="dark"])
+ */
+
+:root,
+html:not([data-theme="dark"]) {
+  /* ============================================
+     BRAND
+     ============================================ */
+
+  --color-primary: var(--color-primary-500);
+
+  --color-primary-hover: var(--color-primary-600);
+
+  --color-primary-active: var(--color-primary-700);
+
+  --color-secondary: var(--color-secondary-500);
+
+  --color-secondary-hover: var(--color-secondary-600);
+
+  --color-secondary-active: var(--color-secondary-700);
+
+  /* ============================================
+     SURFACES
+     ============================================ */
+
+  --surface-background: #faf9f8;
+
+  --surface-primary: #ffffff;
+
+  --surface-card: #ffffff;
+
+  --surface-elevated: #ffffff;
+
+  --surface-floating: #ffffff;
+
+  --surface-navbar: rgba(255, 255, 255, 0.88);
+
+  --surface-footer: #f7f5f4;
+
+  --surface-input: #ffffff;
+
+  --surface-input-hover: var(--color-gray-50);
+
+  --surface-input-disabled: var(--color-gray-100);
+
+  /* ============================================
+     TEXT
+     ============================================ */
+
+  --text-primary: #171717;
+
+  --text-secondary: #525252;
+
+  --text-muted: #737373;
+
+  --text-disabled: #a3a3a3;
+
+  --text-inverse: #ffffff;
+
+  --text-link: var(--color-secondary-600);
+
+  --text-link-hover: var(--color-secondary-700);
+
+  /* ============================================
+     BORDERS
+     ============================================ */
+
+  --border-default: #e5e5e5;
+
+  --border-soft: #f0f0f0;
+
+  --border-strong: #d4d4d4;
+
+  --border-focus: var(--color-secondary-500);
+
+  --border-error: var(--color-error-500);
+
+  /* ============================================
+     PRODUCT UI
+     ============================================ */
+
+  --product-price: #171717;
+
+  --product-old-price: #a3a3a3;
+
+  --product-discount: var(--color-error-500);
+
+  --product-rating: #f59e0b;
+
+  --product-stock: var(--color-success-500);
+
+  /* ============================================
+     COMMERCE STATES
+     ============================================ */
+
+  --cart-highlight: var(--color-primary-50);
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.04);
+
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.06);
+
+  --shadow-md: 0 8px 20px rgb(0 0 0 / 0.08);
+
+  --shadow-lg: 0 16px 40px rgb(0 0 0 / 0.1);
+
+  --shadow-xl: 0 24px 60px rgb(0 0 0 / 0.12);
+
+  --shadow-card: var(--shadow-sm);
+
+  --shadow-modal: var(--shadow-xl);
+}
