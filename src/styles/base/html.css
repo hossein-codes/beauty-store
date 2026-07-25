@@ -4,7 +4,7 @@
  * Global document foundation.
  *
  * Handles:
- * - Font system
+ * - Font system (family is chosen here and inherited by everything)
  * - Direction support
  * - Rendering quality
  * - Theme background
@@ -12,7 +12,9 @@
  */
 
 html {
-  font-size: 16px;
+  /* No fixed px font-size: that would ignore the user's browser font setting,
+     which is a WCAG 1.4.4 failure. 100% == the user's preferred base size. */
+  font-size: 100%;
 
   font-family: var(--font-family-sans);
 
@@ -22,33 +24,41 @@ html {
 
   color: var(--text-primary);
 
-  text-rendering: optimizeLegibility;
-
   -webkit-font-smoothing: antialiased;
 
   -moz-osx-font-smoothing: grayscale;
 
-  scroll-behavior: smooth;
+  /* Persian/Arabic text needs contextual shaping; keep ligatures on. */
+  text-rendering: optimizeLegibility;
 
-  overflow-x: hidden;
+  /* Tabular-ish digits read better for prices. */
+  font-variant-numeric: proportional-nums;
 }
 
 /* ============================================
-   RTL MODE
+   SMOOTH SCROLL — opt in, motion-safe
+   ============================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   RTL MODE (Persian)
    ============================================ */
 
 html[dir="rtl"] {
   font-family: var(--font-family-persian);
 
-  direction: rtl;
+  line-height: var(--line-height-persian);
 }
 
 /* ============================================
-   LTR MODE
+   LTR MODE (Latin)
    ============================================ */
 
 html[dir="ltr"] {
-  font-family: var(--font-family-sans);
-
-  direction: ltr;
+  font-family: var(--font-family-latin);
 }

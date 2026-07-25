@@ -5,9 +5,9 @@
  *
  * Supports:
  * - Desktop ecommerce
- * - Dark / Light themes
- * - Chromium browsers
- * - Firefox
+ * - Dark / Light themes (via tokens — no per-theme duplication needed)
+ * - Chromium / Safari (::-webkit-scrollbar)
+ * - Firefox (scrollbar-width / scrollbar-color)
  */
 
 /* ============================================
@@ -17,58 +17,54 @@
 html {
   scrollbar-width: thin;
 
-  scrollbar-color: var(--border-strong) var(--surface-surface);
+  scrollbar-color: var(--border-strong) var(--surface-subtle);
 }
 
 /* ============================================
    WEBKIT
+
+   Because the thumb/track colors are semantic tokens, dark mode is handled
+   automatically — the previous per-theme override blocks were redundant.
    ============================================ */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 
-  height: 6px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-surface);
+  background: var(--surface-subtle);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-strong);
 
   border-radius: var(--radius-full);
-
-  transition: background-color var(--transition-fast);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);
 }
 
-/* ============================================
-   DARK THEME
-   ============================================ */
-
-html.dark::-webkit-scrollbar-track,
-html[data-theme="dark"]::-webkit-scrollbar-track {
-  background: var(--surface-background);
-}
-
-html.dark::-webkit-scrollbar-thumb,
-html[data-theme="dark"]::-webkit-scrollbar-thumb {
-  background: var(--border-primary);
+::-webkit-scrollbar-corner {
+  background: var(--surface-subtle);
 }
 
 /* ============================================
-   MOBILE / PWA
+   TOUCH DEVICES
+
+   Hide the scrollbar where the OS already draws an overlay one.
+   Keyed off pointer capability rather than viewport width, so a small desktop
+   window keeps its usable scrollbar.
    ============================================ */
 
-@media (max-width: 768px) {
+@media (pointer: coarse) {
   html {
     scrollbar-width: none;
   }
 
+  html::-webkit-scrollbar,
   body::-webkit-scrollbar {
     display: none;
   }

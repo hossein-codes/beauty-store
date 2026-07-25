@@ -75,11 +75,15 @@
   }
 }
 
-@keyframes slideLeft {
+/*
+ * Inline-axis slides. `--slide-from` flips sign in RTL (see below) so
+ * "slide in from the start edge" stays correct in both directions.
+ */
+@keyframes slideInline {
   from {
     opacity: 0;
 
-    transform: translateX(8px);
+    transform: translateX(var(--slide-from, 8px));
   }
 
   to {
@@ -89,17 +93,14 @@
   }
 }
 
-@keyframes slideRight {
-  from {
-    opacity: 0;
-
-    transform: translateX(-8px);
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
   }
 
-  to {
-    opacity: 1;
-
-    transform: translateX(0);
+  50% {
+    opacity: 0.55;
   }
 }
 
@@ -132,14 +133,26 @@
     forwards;
 }
 
-.slide-left {
-  animation: slideLeft var(--motion-duration-normal) var(--motion-ease-out)
+.slide-start {
+  --slide-from: -8px;
+
+  animation: slideInline var(--motion-duration-normal) var(--motion-ease-out)
     forwards;
 }
 
-.slide-right {
-  animation: slideRight var(--motion-duration-normal) var(--motion-ease-out)
+.slide-end {
+  --slide-from: 8px;
+
+  animation: slideInline var(--motion-duration-normal) var(--motion-ease-out)
     forwards;
+}
+
+html[dir="rtl"] .slide-start {
+  --slide-from: 8px;
+}
+
+html[dir="rtl"] .slide-end {
+  --slide-from: -8px;
 }
 
 /* ============================================
@@ -184,16 +197,7 @@
 
 /* ============================================
    REDUCED MOTION
+
+   Handled centrally in `base/accessibility.css` — a single owner instead of
+   the three duplicate !important blocks this file used to carry.
    ============================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-
-    animation-iteration-count: 1 !important;
-
-    transition-duration: 0.01ms !important;
-  }
-}

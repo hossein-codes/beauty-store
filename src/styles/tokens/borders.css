@@ -1,7 +1,17 @@
 /**
  * LUMINA Design System — Border Tokens
- * 
+ *
  * Single source for border widths and styles.
+ *
+ * NAMING GUARD
+ * ------------
+ * Border *colors* live in `semantic-colors.css` under `--border-*`
+ * (--border-default, --border-strong, --border-subtle, ...).
+ * To avoid colliding with those, the composite shorthands here are namespaced
+ * `--border-line-*`. Previously `--border-default` / `--border-strong` were
+ * declared in BOTH files, so a shorthand referenced its own name and the value
+ * was whichever file happened to be imported last — the shorthand silently won
+ * over the color and broke `border-color: var(--border-strong)`.
  */
 
 :root {
@@ -13,8 +23,13 @@
   --border-style-solid: solid;
   --border-style-dashed: dashed;
 
-  /* Combined semantic */
-  --border-thin: var(--border-width-thin) var(--border-style-solid) var(--border-primary);
-  --border-default: var(--border-width-default) var(--border-style-solid) var(--border-primary);
-  --border-strong: var(--border-width-thick) var(--border-style-solid) var(--border-strong);
+  /* Composite shorthands — use for the `border` property only. */
+  --border-line-thin: var(--border-width-thin) var(--border-style-solid)
+    var(--border-default);
+  --border-line-default: var(--border-width-default) var(--border-style-solid)
+    var(--border-default);
+  --border-line-strong: var(--border-width-thick) var(--border-style-solid)
+    var(--border-strong);
+  --border-line-subtle: var(--border-width-thin) var(--border-style-solid)
+    var(--border-subtle);
 }

@@ -46,6 +46,7 @@
   --spacing-button-y: var(--spacing-12);
   --spacing-card: var(--spacing-24);
   --spacing-section: var(--spacing-64);
-  --spacing-page-x: var(--spacing-16);
+  /* Page gutter follows the responsive --layout-gutter (tokens/layout.css). */
+  --spacing-page-x: var(--layout-gutter);
   --spacing-page-y: var(--spacing-32);
 }

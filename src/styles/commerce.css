@@ -24,7 +24,7 @@
 
   overflow: hidden;
 
-  background-color: var(--surface-surface);
+  background-color: var(--surface-subtle);
 
   border: 1px solid var(--border-card);
 
@@ -38,11 +38,19 @@
 .product-card {
   position: relative;
 
-  transition: var(--transition-normal);
+  /* Animate transform only. `transition: all` (the old value) also animated
+     layout properties, forcing a re-layout on every hover. */
+  transition:
+    transform var(--motion-duration-normal) var(--motion-ease-out),
+    box-shadow var(--motion-duration-normal) var(--motion-ease-out);
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .product-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-card);
+  }
 }
 
 /* ============================================
@@ -50,29 +58,35 @@
    ============================================ */
 
 .commerce-price {
-  font-size: var(--font-body-lg);
+  font-size: var(--font-product-price);
 
   font-weight: var(--font-weight-semibold);
 
   color: var(--color-price);
+
+  font-variant-numeric: tabular-nums;
 }
 
 .commerce-price-old {
-  font-size: var(--font-body-sm);
+  font-size: var(--font-product-price-old);
 
   color: var(--color-old-price);
 
   text-decoration: line-through;
 
   margin-inline-start: var(--spacing-8);
+
+  font-variant-numeric: tabular-nums;
 }
 
 .commerce-price-discount {
-  font-size: var(--font-body-lg);
+  font-size: var(--font-product-price);
 
   font-weight: var(--font-weight-bold);
 
   color: var(--color-discount);
+
+  font-variant-numeric: tabular-nums;
 }
 
 .commerce-price-unit {
@@ -83,6 +97,9 @@
 
 /* ============================================
    DISCOUNT / PRODUCT BADGES
+
+   Tinted fills fall back to the light-theme 100-steps, and dark.css overrides
+   the --badge-*-bg/--badge-*-text pairs so contrast stays AA in both themes.
    ============================================ */
 
 .product-badge {
@@ -92,29 +109,31 @@
 
   padding: var(--spacing-4) var(--spacing-8);
 
-  font-size: var(--font-caption);
+  font-size: var(--font-badge);
 
   font-weight: var(--font-weight-medium);
 
   border-radius: var(--radius-full);
+
+  white-space: nowrap;
 }
 
 .badge-discount {
-  color: var(--color-error-700);
+  color: var(--badge-discount-text, var(--color-error-700));
 
-  background: var(--color-error-100);
+  background: var(--badge-discount-bg, var(--color-error-100));
 }
 
 .badge-new {
-  color: var(--color-primary-700);
+  color: var(--badge-new-text, var(--color-primary-700));
 
-  background: var(--color-primary-100);
+  background: var(--badge-new-bg, var(--color-primary-100));
 }
 
 .badge-best {
-  color: var(--color-warning-700);
+  color: var(--badge-best-text, var(--color-warning-800));
 
-  background: var(--color-warning-100);
+  background: var(--badge-best-bg, var(--color-warning-100));
 }
 
 /* ============================================
@@ -149,6 +168,10 @@
   color: var(--text-muted);
 }
 
+.product-rating-star {
+  color: var(--product-rating);
+}
+
 /* ============================================
    TRUST SIGNALS
    ============================================ */
@@ -166,7 +189,7 @@
 
   color: var(--text-muted);
 
-  background: var(--surface-surface);
+  background: var(--surface-subtle);
 
   border: 1px solid var(--border-subtle);
 
@@ -175,24 +198,30 @@
 
 /* ============================================
    QUICK ACTIONS
+
+   Hidden until hover on pointer devices, always visible otherwise.
+   `visibility` is included so the hidden control is removed from the tab order
+   and from screen readers — opacity alone leaves it focusable but invisible.
    ============================================ */
 
 .quick-action {
-  opacity: 0;
-
-  transition: var(--transition-fast);
-}
-
-.product-card:hover .quick-action,
-.product-card:focus-within .quick-action {
   opacity: 1;
+
+  transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
 }
 
-/* Mobile always accessible */
-
-@media (max-width: 768px) {
+@media (hover: hover) {
   .quick-action {
+    opacity: 0;
+
+    visibility: hidden;
+  }
+
+  .product-card:hover .quick-action,
+  .product-card:focus-within .quick-action {
     opacity: 1;
+
+    visibility: visible;
   }
 }
 
@@ -207,7 +236,9 @@
 
   inset-inline-end: var(--spacing-12);
 
-  z-index: var(--z-dropdown);
+  /* A card-local control does not belong on the global dropdown layer.
+     `--z-dropdown` (1000) made it paint over headers and modals. */
+  z-index: var(--z-base);
 
   display: flex;
 
@@ -219,15 +250,21 @@
 
   background: var(--surface-floating);
 
+  color: var(--text-secondary);
+
   border-radius: var(--radius-full);
 
   box-shadow: var(--shadow-sm);
 
-  transition: var(--transition-fast);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 .wishlist-btn:hover {
   transform: scale(1.05);
+}
+
+.wishlist-btn[aria-pressed="true"] {
+  color: var(--color-wishlist);
 }
 
 /* ============================================
@@ -244,4 +281,16 @@
   justify-content: center;
 
   gap: var(--spacing-8);
+}
+
+/* ============================================
+   SKELETON LOADING
+   ============================================ */
+
+.skeleton {
+  background: var(--color-skeleton);
+
+  border-radius: var(--radius-md);
+
+  animation: pulse 1.5s var(--motion-ease-in-out) infinite;
 }

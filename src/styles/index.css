@@ -1,25 +1,32 @@
 /**
  * LUMINA — Enterprise Design System
  * Premium Beauty & Cosmetics Ecommerce Platform
- * 
+ *
  * This is the single entry point for the entire design system.
  * Import order is CRITICAL for proper cascade and overrides.
- * 
+ *
  * IMPORT ORDER PHILOSOPHY:
- * 1. Reset — Remove browser defaults (first)
- * 2. Tokens — Foundational design tokens (colors, typography, spacing etc.)
- * 3. Themes — Light/Dark semantic tokens (override base tokens)
- * 4. Base — HTML element defaults using tokens
- * 5. Utilities — Low-level utility classes
- * 6. Commerce — Commerce-specific utilities
- * 7. Animations — Motion tokens and keyframe definitions
- * 
+ * 1. Reset      — Remove browser defaults (first)
+ * 2. Tokens     — Foundational design tokens (colors, typography, spacing…)
+ * 3. Themes     — Light/Dark semantic tokens (override base tokens)
+ * 4. Base       — HTML element defaults using tokens
+ * 5. Utilities  — Low-level utility classes
+ * 6. Layouts    — High-level layout patterns
+ * 7. Commerce   — Commerce-specific utilities
+ * 8. Animations — Keyframes and motion classes
+ *
  * NEVER import component styles here. Components use tokens only.
  * All values MUST come from CSS custom properties defined in tokens.
+ *
+ * FONTS: loaded via `next/font` in `src/lib/fonts.ts`, not with @font-face.
  */
 
+/* 1 — RESET */
 @import "./reset.css";
-@import "./base/fonts.css";
+
+/* 2 — TOKENS
+   colors → semantic-colors is the required order: semantic tokens reference
+   the raw palette. Everything else is independent. */
 @import "./tokens/colors.css";
 @import "./tokens/semantic-colors.css";
 @import "./tokens/typography.css";
@@ -37,32 +44,25 @@
 @import "./tokens/icons.css";
 @import "./tokens/blur.css";
 
+/* 3 — THEMES (must come after tokens, before base) */
 @import "./themes/theme.css";
 @import "./themes/light.css";
 @import "./themes/dark.css";
 
+/* 4 — BASE */
 @import "./base.css";
 
-
+/* 5 — UTILITIES
+   utilities.css already aggregates every file in utilities/. Listing them
+   again here (as this file used to) imported each one twice and doubled the
+   shipped CSS. */
 @import "./utilities.css";
-@import "./utilities/display.css";
-@import "./utilities/flex.css";
-@import "./utilities/grid.css";
-@import "./utilities/position.css";
-@import "./utilities/sizing.css";
-@import "./utilities/text.css";
-@import "./utilities/overflow.css";
-@import "./utilities/visibility.css";
-@import "./utilities/effects.css";
 
+/* 6 — LAYOUTS */
 @import "./layouts.css";
-@import "./commerce.css";
-@import "./animations.css";
 
-/* 
- * Final override layer for any theme-specific or brand-specific 
- * adjustments that must win. Keep this minimal.
- */
-:root {
-  color-scheme: light;
-}
+/* 7 — COMMERCE */
+@import "./commerce.css";
+
+/* 8 — ANIMATIONS */
+@import "./animations.css";

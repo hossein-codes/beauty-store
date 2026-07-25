@@ -176,7 +176,11 @@
 
   --color-wishlist: #ec4899;
 
-  /* Loading Skeleton */
+  /* Loading Skeleton (dark theme overrides this) */
 
   --color-skeleton: #e5e7eb;
+
+  /* Stock alias kept for symmetry with --color-stock-available/-low */
+
+  --color-stock-out: var(--color-stock-empty);
 }

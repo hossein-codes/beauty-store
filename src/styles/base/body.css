@@ -1,18 +1,25 @@
 /**
  * LUMINA — Base: Body
+ *
+ * The document body owns the themed background and the default text color.
+ * Font family / direction are decided on <html> (see html.css) and inherited.
  */
-body {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-body-md);
-  line-height: var(--line-height-normal);
-  background-color: var(--surface-background);
-  color: var(--text-primary);
-  min-height: 100vh;
-}
 
-html[dir="rtl"] body {
-  font-family: var(--font-family-persian);
-}
 body {
-  outline: 10px solid red !important;
+  font-family: inherit;
+
+  font-size: var(--font-body-md);
+
+  line-height: inherit;
+
+  font-weight: var(--font-weight-normal);
+
+  background-color: var(--surface-background);
+
+  color: var(--text-primary);
+
+  /* dvh avoids the mobile-browser URL-bar jump that 100vh causes. */
+  min-height: 100vh;
+
+  min-height: 100dvh;
 }

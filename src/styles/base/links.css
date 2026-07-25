@@ -17,24 +17,12 @@ a {
   text-decoration: none;
 
   transition:
-    color var(--transition-fast),
-    opacity var(--transition-fast);
+    color var(--motion-duration-fast) var(--motion-ease-out),
+    opacity var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 a:hover {
   color: var(--text-link-hover);
-}
-
-/* ============================================
-   FOCUS ACCESSIBILITY
-   ============================================ */
-
-a:focus-visible {
-  outline: 2px solid var(--border-focus);
-
-  outline-offset: 3px;
-
-  border-radius: var(--radius-sm);
 }
 
 /* ============================================
@@ -48,7 +36,7 @@ a:focus-visible {
 
   font-weight: var(--font-weight-medium);
 
-  transition: color var(--transition-fast);
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 .nav-link:hover,
@@ -63,7 +51,7 @@ a:focus-visible {
 .product-link {
   color: var(--text-primary);
 
-  transition: color var(--transition-fast);
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 .product-link:hover {
@@ -93,7 +81,7 @@ a:focus-visible {
 
   justify-content: center;
 
-  gap: var(--space-2);
+  gap: var(--spacing-8);
 
   cursor: pointer;
 }
@@ -105,13 +93,16 @@ a:focus-visible {
 a[aria-disabled="true"] {
   pointer-events: none;
 
-  opacity: 0.5;
+  opacity: var(--opacity-disabled);
 }
 
 /* ============================================
-   RTL
+   EXTERNAL LINK SAFETY
    ============================================ */
 
-html[dir="rtl"] a {
-  letter-spacing: 0;
+a[target="_blank"] {
+  /* Reminder: always pair with rel="noopener noreferrer" in JSX. */
+  cursor: pointer;
 }
+
+/* RTL letter-spacing is normalized centrally in base/typography.css. */

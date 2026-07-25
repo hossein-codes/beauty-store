@@ -67,56 +67,78 @@
 
 /* ============================================
    FONT SCALE
+
+   These set font-size + line-height explicitly rather than using the `font:`
+   shorthand. The shorthand always resets font-family, which forced the Latin
+   stack onto Persian text and broke RTL rendering everywhere it was used.
    ============================================ */
 
 .font-display-xl {
-  font: var(--text-display-xl);
+  font-size: var(--font-display-xl);
+  line-height: var(--line-height-tight);
   font-weight: var(--font-weight-semibold);
 }
 
 .font-display-lg {
-  font: var(--text-display-lg);
+  font-size: var(--font-display-lg);
+  line-height: var(--line-height-tight);
   font-weight: var(--font-weight-semibold);
 }
 
 .font-heading-xl {
-  font: var(--text-heading-xl);
+  font-size: var(--font-heading-xl);
+  line-height: var(--line-height-snug);
   font-weight: var(--font-weight-semibold);
 }
 
 .font-heading-lg {
-  font: var(--text-heading-lg);
+  font-size: var(--font-heading-lg);
+  line-height: var(--line-height-snug);
   font-weight: var(--font-weight-semibold);
 }
 
 .font-heading-md {
-  font: var(--text-heading-md);
+  font-size: var(--font-heading-md);
+  line-height: var(--line-height-snug);
   font-weight: var(--font-weight-semibold);
 }
 
+.font-heading-sm {
+  font-size: var(--font-heading-sm);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-medium);
+}
+
 .font-body-lg {
-  font: var(--text-body-lg);
+  font-size: var(--font-body-lg);
+  line-height: var(--line-height-relaxed);
 }
 
 .font-body {
-  font: var(--text-body-md);
+  font-size: var(--font-body-md);
+  line-height: var(--line-height-normal);
 }
 
 .font-body-sm {
-  font: var(--text-body-sm);
+  font-size: var(--font-body-sm);
+  line-height: var(--line-height-normal);
 }
 
 .font-caption {
-  font: var(--text-caption);
+  font-size: var(--font-caption);
+  line-height: var(--line-height-normal);
 }
 
 .font-label {
-  font: var(--text-label);
+  font-size: var(--font-label);
+  line-height: var(--line-height-normal);
   font-weight: var(--font-weight-medium);
 }
 
 .font-button {
-  font: var(--text-button);
+  font-size: var(--font-button);
+  line-height: var(--line-height-none);
+  font-weight: var(--font-weight-medium);
 }
 
 /* ============================================
@@ -147,6 +169,11 @@
   text-align: center;
 }
 
+/*
+ * Physical alignment — stays put regardless of direction. Use for things that
+ * are inherently physical (e.g. a Latin-only code block).
+ */
+
 .text-left {
   text-align: left;
 }
@@ -155,12 +182,18 @@
   text-align: right;
 }
 
-[dir="rtl"] .text-left {
-  text-align: right;
+/*
+ * Logical alignment — flips automatically in RTL. Prefer these.
+ * The old `[dir="rtl"] .text-left { text-align: right }` override made
+ * `.text-left` mean "right" in Persian, which is a trap.
+ */
+
+.text-start {
+  text-align: start;
 }
 
-[dir="rtl"] .text-right {
-  text-align: left;
+.text-end {
+  text-align: end;
 }
 
 /* ============================================
@@ -196,6 +229,8 @@
 
   -webkit-line-clamp: 2;
 
+  line-clamp: 2;
+
   -webkit-box-orient: vertical;
 
   overflow: hidden;
@@ -205,6 +240,8 @@
   display: -webkit-box;
 
   -webkit-line-clamp: 3;
+
+  line-clamp: 3;
 
   -webkit-box-orient: vertical;
 

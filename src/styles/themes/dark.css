@@ -11,13 +11,14 @@
  *
  * Applied:
  * html[data-theme="dark"]
- * html.dark
+ * html.dark            ← next-themes with attribute="class"
  */
 
 html[data-theme="dark"],
 html.dark {
   /* ============================================
      BRAND
+     Lighter brand steps so they stay legible on dark surfaces.
      ============================================ */
 
   --color-primary: var(--color-primary-400);
@@ -26,11 +27,15 @@ html.dark {
 
   --color-primary-active: var(--color-primary-500);
 
+  --color-primary-soft: var(--color-primary-950);
+
   --color-secondary: var(--color-secondary-400);
 
   --color-secondary-hover: var(--color-secondary-300);
 
   --color-secondary-active: var(--color-secondary-500);
+
+  --color-secondary-soft: var(--color-secondary-950);
 
   /* ============================================
      SURFACES
@@ -45,6 +50,12 @@ html.dark {
   --surface-elevated: #252323;
 
   --surface-floating: #292727;
+
+  --surface-modal: #1f1e1e;
+
+  --surface-subtle: #1f1e1e;
+
+  --surface-overlay: rgba(0, 0, 0, 0.65);
 
   --surface-navbar: rgba(18, 18, 18, 0.88);
 
@@ -74,19 +85,37 @@ html.dark {
 
   --text-link-hover: var(--color-secondary-300);
 
+  --text-success: var(--color-success-400);
+
+  --text-warning: var(--color-warning-400);
+
+  --text-error: var(--color-error-400);
+
+  --text-info: var(--color-info-400);
+
   /* ============================================
      BORDERS
      ============================================ */
 
   --border-default: #363333;
 
-  --border-soft: #2a2828;
+  --border-subtle: #2a2828;
 
   --border-strong: #4a4646;
 
   --border-focus: var(--color-secondary-400);
 
   --border-error: var(--color-error-400);
+
+  --border-card: var(--border-subtle);
+
+  --border-input: var(--border-default);
+
+  --border-input-focus: var(--border-focus);
+
+  --border-primary: var(--border-default);
+
+  --border-soft: var(--border-subtle);
 
   /* ============================================
      PRODUCT SYSTEM
@@ -102,11 +131,40 @@ html.dark {
 
   --product-stock: var(--color-success-400);
 
+  /* Stock states need lighter steps on dark surfaces */
+
+  --color-stock-available: var(--color-success-400);
+
+  --color-stock-low: var(--color-warning-400);
+
+  --color-stock-empty: var(--color-error-400);
+
+  --color-skeleton: #2a2828;
+
   /* ============================================
      COMMERCE
      ============================================ */
 
   --cart-highlight: rgba(214, 90, 140, 0.12);
+
+  --state-hover: rgba(228, 125, 167, 0.1);
+
+  --state-active: rgba(228, 125, 167, 0.2);
+
+  /* Tinted badge backgrounds: the light theme's 100-step fills are far too
+     bright here, so we mix the hue into the card surface instead. */
+
+  --badge-discount-bg: color-mix(in srgb, var(--color-error-400) 18%, #1f1e1e);
+
+  --badge-discount-text: var(--color-error-300);
+
+  --badge-new-bg: color-mix(in srgb, var(--color-primary-400) 18%, #1f1e1e);
+
+  --badge-new-text: var(--color-primary-300);
+
+  --badge-best-bg: color-mix(in srgb, var(--color-warning-400) 18%, #1f1e1e);
+
+  --badge-best-text: var(--color-warning-300);
 
   /* ============================================
      SHADOWS
@@ -125,4 +183,8 @@ html.dark {
   --shadow-card: 0 8px 20px rgb(0 0 0 / 0.35);
 
   --shadow-modal: 0 30px 70px rgb(0 0 0 / 0.65);
+
+  --shadow-floating: var(--shadow-lg);
+
+  --shadow-dropdown: var(--shadow-md);
 }

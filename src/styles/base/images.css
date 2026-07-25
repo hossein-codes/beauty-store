@@ -9,37 +9,41 @@
  * - Banners
  * - Brand logos
  * - User avatars
- * - Next/Image
+ * - next/image
  */
 
 /* ============================================
-   DEFAULT IMAGE
+   DEFAULTS
+
+   Deliberately minimal. The previous version put `object-fit: cover` and a
+   border-radius on EVERY <img>, which silently cropped logos, icons and
+   payment badges, and rounded things that shouldn't be rounded. Presentation
+   belongs to the specific classes below.
    ============================================ */
 
-img {
+img,
+svg,
+video {
   display: block;
 
   max-width: 100%;
+}
 
+img,
+video {
   height: auto;
-
-  object-fit: cover;
-
-  border-radius: var(--radius-md);
 }
 
-/* ============================================
-   IMAGE LOADING
-   ============================================ */
+/*
+ * next/image renders <img> inside a wrapper and controls sizing itself.
+ * Never impose object-fit/border-radius globally or it fights the component.
+ */
 
-img[loading="lazy"] {
-  opacity: 0;
-
-  transition: opacity var(--motion-duration-normal) var(--motion-ease-out);
-}
-
-img[loading="lazy"].loaded {
-  opacity: 1;
+/* Non-decorative images that failed to load shouldn't show a broken icon
+   sprawl; alt text stays readable. */
+img:not([alt]) {
+  /* Dev hint: an <img> with no alt attribute is an a11y bug. */
+  outline: 2px dashed var(--state-warning);
 }
 
 /* ============================================
@@ -54,6 +58,8 @@ img[loading="lazy"].loaded {
   object-fit: cover;
 
   border-radius: var(--radius-card);
+
+  background-color: var(--surface-subtle);
 }
 
 /* ============================================
@@ -61,9 +67,17 @@ img[loading="lazy"].loaded {
    ============================================ */
 
 .product-gallery-image {
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
   border-radius: var(--radius-lg);
 
   overflow: hidden;
+
+  background-color: var(--surface-subtle);
 }
 
 /* ============================================
@@ -78,6 +92,8 @@ img[loading="lazy"].loaded {
   object-fit: cover;
 
   border-radius: var(--radius-xl);
+
+  background-color: var(--surface-subtle);
 }
 
 /* ============================================
@@ -85,37 +101,48 @@ img[loading="lazy"].loaded {
    ============================================ */
 
 .avatar-image {
-  width: 40px;
+  width: var(--icon-size-40);
 
-  height: 40px;
+  height: var(--icon-size-40);
 
-  border-radius: 999px;
+  border-radius: var(--radius-full);
 
   object-fit: cover;
+
+  background-color: var(--surface-subtle);
 }
 
 /* ============================================
-   IMAGE PLACEHOLDER
+   BRAND LOGOS
+
+   Must never be cropped — `contain`, not `cover`.
+   ============================================ */
+
+.logo-image {
+  object-fit: contain;
+
+  border-radius: 0;
+}
+
+/* ============================================
+   PLACEHOLDER / SKELETON
    ============================================ */
 
 .image-placeholder {
-  background: var(--surface-elevated);
+  background: var(--color-skeleton);
 
   border-radius: var(--radius-md);
 }
 
 /* ============================================
-   ACCESSIBILITY
+   NON-DRAGGABLE PRODUCT MEDIA
+
+   Applied by class, not globally: `user-select: none` on all images breaks
+   copy-paste of surrounding text selections in some browsers.
    ============================================ */
 
-img {
+.media-no-drag {
   user-select: none;
-}
 
-/* ============================================
-   RTL SAFE
-   ============================================ */
-
-html[dir="rtl"] img {
-  transform: none;
+  -webkit-user-drag: none;
 }

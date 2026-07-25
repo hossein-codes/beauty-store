@@ -1,8 +1,18 @@
 /**
  * LUMINA Design System — Breakpoints (Mobile First)
+ *
+ * ⚠️  CAVEAT
+ * CSS custom properties are NOT valid inside media query conditions:
+ *
+ *   @media (min-width: var(--breakpoint-md)) { }   ← does nothing
+ *
+ * Media queries below therefore hard-code the same pixel values. Keep the two
+ * in sync; these variables exist so JS (matchMedia, virtualised grids) can read
+ * one source of truth via getComputedStyle.
  */
+
 :root {
-  --breakpoint-xs: 0;
+  --breakpoint-xs: 0px;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;

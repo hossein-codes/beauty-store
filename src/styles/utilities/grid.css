@@ -11,13 +11,7 @@
  * - Mobile app layouts
  */
 
-/* ============================================
-   GRID DISPLAY
-   ============================================ */
-
-.grid {
-  display: grid;
-}
+/* `.grid` itself is declared in utilities/display.css (single owner). */
 
 /* ============================================
    COLUMNS
@@ -129,9 +123,7 @@
   place-items: center;
 }
 
-.items-center {
-  align-items: center;
-}
+/* `.items-center` is declared in utilities/flex.css (single owner). */
 
 .justify-items-center {
   justify-items: center;

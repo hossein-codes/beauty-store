@@ -7,6 +7,11 @@
  * Components MUST use semantic tokens only.
  * Never use raw palette colors directly.
  *
+ * NOTE:
+ * This file defines the *light* defaults. `themes/light.css` and
+ * `themes/dark.css` re-declare the theme-dependent subset. Anything that is
+ * theme-independent (badges, state tints, commerce aliases) lives only here.
+ *
  * Supports:
  * - Beauty Ecommerce UI
  * - Light / Dark themes
@@ -51,11 +56,19 @@
 
   --surface-floating: #ffffff;
 
+  --surface-modal: #ffffff;
+
   --surface-overlay: rgba(0, 0, 0, 0.45);
 
   --surface-navbar: rgba(255, 255, 255, 0.85);
 
   --surface-footer: var(--color-gray-100);
+
+  /*
+   * Neutral "raised panel" surface (skeletons, scrollbar track, product image
+   * backdrops). Formerly referenced as the undefined `--surface-surface`.
+   */
+  --surface-subtle: var(--color-gray-100);
 
   /* ============================================
      INPUT / FORM SURFACES
@@ -87,19 +100,43 @@
 
   --text-link-hover: var(--color-secondary-700);
 
+  /* Feedback text — must stay readable on --surface-background */
+
+  --text-success: var(--color-success-700);
+
+  --text-warning: var(--color-warning-700);
+
+  --text-error: var(--color-error-600);
+
+  --text-info: var(--color-info-700);
+
   /* ============================================
      BORDER SYSTEM
      ============================================ */
 
   --border-default: var(--color-gray-200);
 
-  --border-soft: var(--color-gray-100);
+  --border-subtle: var(--color-gray-100);
 
   --border-strong: var(--color-gray-300);
 
   --border-focus: var(--color-secondary-500);
 
   --border-error: var(--color-error-500);
+
+  /* Contextual borders */
+
+  --border-card: var(--border-subtle);
+
+  --border-input: var(--border-strong);
+
+  --border-input-focus: var(--border-focus);
+
+  /* Legacy aliases (older rules referenced these names) */
+
+  --border-primary: var(--border-default);
+
+  --border-soft: var(--border-subtle);
 
   /* ============================================
      INTERACTION STATES
@@ -136,6 +173,18 @@
   --product-rating: #f59e0b;
 
   --product-stock: var(--color-success-500);
+
+  /* Commerce aliases used by commerce.css / text utilities */
+
+  --color-price: var(--product-price);
+
+  --color-old-price: var(--product-old-price);
+
+  --color-discount: var(--product-discount);
+
+  /* Stock states */
+
+  --color-stock-out: var(--color-stock-empty);
 
   /* Badge */
 
