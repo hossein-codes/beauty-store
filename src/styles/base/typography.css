@@ -9,18 +9,21 @@
  * - Checkout
  * - Dashboard
  * - Mobile app
+ *
+ * Font *family* is inherited from <html> (see base/html.css) so that switching
+ * language switches every element at once. Only size / weight / rhythm here.
  */
-
-body {
-  font-family: var(--font-family-sans);
-}
 
 /* ============================================
    HEADINGS
+
+   Fluid sizing with clamp(): the display sizes were fixed at 3rem, which
+   overflowed a 360px phone. clamp() scales them down on small viewports
+   without needing a media query per step.
    ============================================ */
 
 h1 {
-  font-size: var(--font-display-lg);
+  font-size: clamp(1.875rem, 1.35rem + 2.6vw, var(--font-display-lg));
 
   line-height: var(--line-height-tight);
 
@@ -29,10 +32,12 @@ h1 {
   letter-spacing: var(--letter-spacing-tight);
 
   color: var(--text-primary);
+
+  text-wrap: balance;
 }
 
 h2 {
-  font-size: var(--font-heading-xl);
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, var(--font-heading-xl));
 
   line-height: var(--line-height-snug);
 
@@ -41,20 +46,35 @@ h2 {
   letter-spacing: var(--letter-spacing-tight);
 
   color: var(--text-primary);
+
+  text-wrap: balance;
 }
 
 h3 {
-  font-size: var(--font-heading-lg);
+  font-size: clamp(1.25rem, 1.1rem + 0.75vw, var(--font-heading-lg));
 
   line-height: var(--line-height-snug);
 
   font-weight: var(--font-weight-semibold);
 
   color: var(--text-primary);
+
+  text-wrap: balance;
 }
 
 h4 {
   font-size: var(--font-heading-sm);
+
+  line-height: var(--line-height-normal);
+
+  font-weight: var(--font-weight-medium);
+
+  color: var(--text-primary);
+}
+
+h5,
+h6 {
+  font-size: var(--font-body-lg);
 
   line-height: var(--line-height-normal);
 
@@ -73,18 +93,17 @@ p {
   line-height: var(--line-height-relaxed);
 
   color: var(--text-secondary);
+
+  text-wrap: pretty;
 }
 
-.text-muted {
-  color: var(--text-muted);
-}
-
-.text-caption {
+small {
   font-size: var(--font-caption);
+}
 
-  line-height: var(--line-height-normal);
-
-  color: var(--text-muted);
+strong,
+b {
+  font-weight: var(--font-weight-semibold);
 }
 
 /* ============================================
@@ -102,74 +121,41 @@ label {
 }
 
 /* ============================================
-   COMMERCE TYPOGRAPHY
+   NUMERALS
+
+   Prices, counts and countdowns must not "wobble" as digits change, so give
+   them tabular figures. Persian content keeps proportional figures.
    ============================================ */
 
-.product-title {
-  font-size: var(--font-title);
+.tabular-nums,
+time,
+[data-numeric] {
+  font-variant-numeric: tabular-nums;
 
-  line-height: var(--line-height-snug);
-
-  font-weight: var(--font-weight-medium);
-
-  color: var(--text-primary);
-}
-
-.product-price {
-  font-size: 1.25rem;
-
-  line-height: var(--line-height-normal);
-
-  font-weight: var(--font-weight-bold);
-
-  color: var(--product-price);
-}
-
-.product-old-price {
-  font-size: var(--font-body-sm);
-
-  text-decoration: line-through;
-
-  color: var(--product-old-price);
-}
-
-.discount-badge {
-  font-size: var(--font-caption);
-
-  font-weight: var(--font-weight-semibold);
-
-  color: var(--product-discount);
+  font-feature-settings: "tnum";
 }
 
 /* ============================================
-   BUTTON + INPUT TEXT
+   RTL TYPOGRAPHY
+
+   Persian type has no uppercase and no tracking conventions; negative
+   letter-spacing actively breaks the joining of Arabic-script glyphs.
    ============================================ */
 
-button {
-  font-size: var(--font-button);
-
-  font-weight: var(--font-weight-medium);
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6,
+html[dir="rtl"] p,
+html[dir="rtl"] label,
+html[dir="rtl"] button,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea {
+  letter-spacing: var(--letter-spacing-normal);
 }
 
-input,
-textarea,
-select {
-  font-size: var(--font-input);
-
-  color: var(--text-primary);
-}
-
-/* ============================================
-   RTL TYPOGRAPHY FIX
-   ============================================ */
-
-html[dir="rtl"] {
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  label {
-    letter-spacing: 0;
-  }
+html[dir="rtl"] .uppercase {
+  text-transform: none;
 }

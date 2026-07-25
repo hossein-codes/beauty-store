@@ -2,18 +2,11 @@
  * LUMINA Design System — Theme Base
  *
  * PURPOSE:
- * Central theme controller.
+ * Central theme controller — the theme-independent plumbing.
+ * Actual color values live in `light.css` / `dark.css`.
  *
- * Supports:
- * - Light mode
- * - Dark mode
- * - PWA
- * - Mobile App
- * - Smooth theme transition
- *
- * Theme switching:
- * html[data-theme="dark"]
- * html.dark
+ * Theme switching (next-themes, attribute="class"):
+ *   html.dark  /  html[data-theme="dark"]
  */
 
 /* ============================================
@@ -21,44 +14,44 @@
    ============================================ */
 
 :root {
-  color-scheme: light dark;
-
-  /* Theme transition */
+  /* Theme transition — kept to color properties only. */
 
   --theme-transition:
-    background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    background-color var(--motion-duration-slow) var(--motion-ease-out),
+    border-color var(--motion-duration-slow) var(--motion-ease-out),
+    color var(--motion-duration-slow) var(--motion-ease-out);
 
   /* Global UI behavior */
 
-  --theme-radius: 16px;
+  --theme-radius: var(--radius-xl);
 
-  --theme-focus-ring: 0 0 0 3px rgba(92, 143, 232, 0.25);
+  --theme-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--border-focus) 25%, transparent);
 
   /* Overlay */
 
-  --theme-overlay: rgba(0, 0, 0, 0.45);
+  --theme-overlay: var(--surface-overlay);
 
   /* Selection */
 
-  --theme-selection-bg: var(--color-primary-200);
+  --theme-selection-bg: color-mix(
+    in srgb,
+    var(--color-primary) 25%,
+    transparent
+  );
 
-  --theme-selection-text: var(--color-gray-950);
+  --theme-selection-text: var(--text-primary);
 }
 
 /* ============================================
-   LIGHT MODE DEFAULT
+   COLOR SCHEME
+   Tells the browser which built-in UI (scrollbars, form controls,
+   spellcheck underlines) to render.
    ============================================ */
 
 html {
   color-scheme: light;
-
-  background: var(--surface-background);
 }
-
-/* ============================================
-   DARK MODE
-   ============================================ */
 
 html[data-theme="dark"],
 html.dark {
@@ -67,6 +60,10 @@ html.dark {
 
 /* ============================================
    SMOOTH THEME CHANGE
+
+   Scoped to the elements that actually paint a themed surface. The previous
+   version targeted every `div`, which put a transition on thousands of nodes
+   and made scrolling/animation janky on mid-range mobile.
    ============================================ */
 
 body,
@@ -74,16 +71,17 @@ button,
 input,
 textarea,
 select,
-article,
-section,
-div {
+[data-theme-surface] {
   transition: var(--theme-transition);
 }
 
 /* ============================================
    PREVENT FLASH DURING THEME LOAD
+   next-themes adds this via `disableTransitionOnChange`.
    ============================================ */
 
-html.theme-loading * {
+html.theme-loading *,
+html.theme-loading *::before,
+html.theme-loading *::after {
   transition: none !important;
 }

@@ -80,18 +80,23 @@
 .disabled {
   opacity: var(--opacity-disabled);
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 /* ============================================
-   TRANSITION FRIENDLY
+   STATIC VISIBILITY STATES
+
+   Renamed from .fade-in / .fade-out: those names already belong to the
+   keyframe animation classes in animations.css, which is imported later and
+   silently overrode these. Same class name, two different behaviours.
    ============================================ */
 
-.fade-in {
+.is-shown {
   opacity: 1;
   visibility: visible;
 }
 
-.fade-out {
+.is-hidden {
   opacity: 0;
   visibility: hidden;
 }

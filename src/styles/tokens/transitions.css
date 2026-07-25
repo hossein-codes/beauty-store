@@ -1,13 +1,45 @@
 /**
  * LUMINA Design System — Transition Tokens
+ *
+ * USAGE
+ * -----
+ * These are complete `transition` values — assign them, don't append a
+ * property name:
+ *
+ *   ✅  transition: var(--transition-colors);
+ *   ❌  transition: transform var(--transition-normal);
+ *
+ * The second form expands to `transition: transform all 150ms ease-out`, which
+ * is invalid and silently dropped by every browser. To animate one specific
+ * property, write the longhand with the motion tokens:
+ *
+ *   transition: transform var(--motion-duration-normal) var(--motion-ease-out);
+ *
+ * `--transition-colors` was also previously broken: it listed three properties
+ * but only gave a duration to the last one, so `color` and `background-color`
+ * fell back to 0s and never animated.
  */
+
 :root {
+  /* Broad — convenient, but animates every animatable property. */
   --transition-fast: all var(--motion-duration-fast) var(--motion-ease-out);
   --transition-normal: all var(--motion-duration-normal) var(--motion-ease-out);
   --transition-slow: all var(--motion-duration-slow) var(--motion-ease-out);
 
-  --transition-colors: color, background-color, border-color var(--motion-duration-normal) var(--motion-ease-out);
-  --transition-opacity: opacity var(--motion-duration-normal) var(--motion-ease-out);
-  --transition-transform: transform var(--motion-duration-normal) var(--motion-ease-out);
-  --transition-shadow: box-shadow var(--motion-duration-normal) var(--motion-ease-out);
+  /* Targeted — preferred, cheaper to composite. */
+  --transition-colors:
+    color var(--motion-duration-normal) var(--motion-ease-out),
+    background-color var(--motion-duration-normal) var(--motion-ease-out),
+    border-color var(--motion-duration-normal) var(--motion-ease-out),
+    fill var(--motion-duration-normal) var(--motion-ease-out),
+    stroke var(--motion-duration-normal) var(--motion-ease-out);
+
+  --transition-opacity: opacity var(--motion-duration-normal)
+    var(--motion-ease-out);
+
+  --transition-transform: transform var(--motion-duration-normal)
+    var(--motion-ease-out);
+
+  --transition-shadow: box-shadow var(--motion-duration-normal)
+    var(--motion-ease-out);
 }

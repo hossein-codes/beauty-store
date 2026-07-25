@@ -15,17 +15,9 @@
    ============================================ */
 
 ::selection {
-  background-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  background-color: var(--theme-selection-bg);
 
-  color: var(--text-primary);
-}
-
-/* Firefox Support */
-
-::-moz-selection {
-  background-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
-
-  color: var(--text-primary);
+  color: var(--theme-selection-text);
 }
 
 /* ============================================

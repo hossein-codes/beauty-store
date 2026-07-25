@@ -1,6 +1,0 @@
-/**
- * LUMINA Design System — Main Entry (Legacy compatibility)
- * This file now delegates to the full enterprise architecture.
- * All new code should import from ./index.css
- */
-@import "./index.css";

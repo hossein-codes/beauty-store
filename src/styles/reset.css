@@ -1,13 +1,14 @@
 /**
  * LUMINA Design System — Reset Layer
- * 
+ *
  * Purpose: Remove browser defaults while preserving accessibility.
- * This ensures consistent foundation across all browsers and devices.
- * 
+ * This ensures a consistent foundation across all browsers and devices.
+ *
  * Philosophy: Start from zero. Every visual decision must come from tokens.
- * Do not rely on user-agent styles.
- * 
- * WCAG AA compliance: Preserve focus outlines (handled in accessibility.css)
+ *
+ * SCOPE: This file only *removes* things. It sets no colors, no fonts and no
+ * sizes — those belong to `base/*`. Anything token-driven that used to live
+ * here has been moved so the cascade has exactly one owner per concern.
  */
 
 *,
@@ -19,36 +20,35 @@
 }
 
 html {
-  /* Prevent text size adjust on mobile */
+  /* Stop iOS/Android from inflating text in landscape. */
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  /* Smooth scrolling for internal links */
-  scroll-behavior: smooth;
 }
 
 body {
-  /* Prevent horizontal scroll by default */
-  overflow-x: hidden;
-  /* Improve text rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  /*
+   * `clip` rather than `hidden`: `overflow-x: hidden` on body/html propagates
+   * to the viewport and silently kills `position: sticky` on every descendant
+   * (sticky headers, filter rails, sticky add-to-cart bars). `clip` contains
+   * accidental horizontal overflow without creating a scroll container.
+   */
+  overflow-x: clip;
 }
 
-/* Remove default list styles */
+/* Remove default list styles for the semantic lists we use as layout. */
 ul,
 ol {
   list-style: none;
 }
 
-/* Remove default link styles - semantic handled in base/links.css */
+/* Links: color/decoration are owned by base/links.css. */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Make images and media responsive by default */
+/* Make replaced elements behave predictably. */
 img,
 picture,
 video,
@@ -56,19 +56,24 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+}
+
+img,
+video {
   height: auto;
 }
 
-/* Inherit fonts properly for form elements */
+/* Inherit typography into form controls (they don't by default). */
 input,
 button,
 textarea,
 select {
   font: inherit;
   color: inherit;
+  letter-spacing: inherit;
 }
 
-/* Remove default button styles */
+/* Strip the native button chrome; base/forms.css rebuilds it. */
 button {
   background: none;
   border: none;
@@ -90,24 +95,35 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-/* Consistent placeholder styling (tokens override color) */
+/* Placeholders default to a dimmed color in some browsers. */
 ::placeholder {
   opacity: 1;
 }
 
-/* Remove default focus ring — we provide our own via tokens */
-:focus-visible {
-  outline: none;
+/* Long words (URLs, Persian compounds) must not blow out the layout. */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
 
-/* Respect user reduced motion preference globally */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Headings inherit the document family rather than the UA serif stack. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
 }
+
+/*
+ * NOTE: reduced-motion handling is centralized in `base/accessibility.css`.
+ * It used to be duplicated here and in `animations.css`; three copies of the
+ * same `!important` block made it impossible to reason about overrides.
+ */

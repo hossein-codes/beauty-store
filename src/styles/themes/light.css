@@ -10,12 +10,17 @@
  * - Trust focused
  *
  * Applied when:
- * :root
- * html:not([data-theme="dark"])
+ * :root  (and explicitly via html[data-theme="light"] / html.light)
+ *
+ * NOTE: This intentionally does NOT use `html:not([data-theme="dark"])`.
+ * That selector has higher specificity than the `html.dark` selector used by
+ * next-themes, so light values kept winning in dark mode. Plain `:root` (same
+ * specificity, imported earlier) lets dark.css override correctly.
  */
 
 :root,
-html:not([data-theme="dark"]) {
+html[data-theme="light"],
+html.light {
   /* ============================================
      BRAND
      ============================================ */
@@ -26,11 +31,15 @@ html:not([data-theme="dark"]) {
 
   --color-primary-active: var(--color-primary-700);
 
+  --color-primary-soft: var(--color-primary-100);
+
   --color-secondary: var(--color-secondary-500);
 
   --color-secondary-hover: var(--color-secondary-600);
 
   --color-secondary-active: var(--color-secondary-700);
+
+  --color-secondary-soft: var(--color-secondary-100);
 
   /* ============================================
      SURFACES
@@ -45,6 +54,12 @@ html:not([data-theme="dark"]) {
   --surface-elevated: #ffffff;
 
   --surface-floating: #ffffff;
+
+  --surface-modal: #ffffff;
+
+  --surface-subtle: #f3f1f0;
+
+  --surface-overlay: rgba(0, 0, 0, 0.45);
 
   --surface-navbar: rgba(255, 255, 255, 0.88);
 
@@ -74,19 +89,37 @@ html:not([data-theme="dark"]) {
 
   --text-link-hover: var(--color-secondary-700);
 
+  --text-success: var(--color-success-700);
+
+  --text-warning: var(--color-warning-700);
+
+  --text-error: var(--color-error-600);
+
+  --text-info: var(--color-info-700);
+
   /* ============================================
      BORDERS
      ============================================ */
 
   --border-default: #e5e5e5;
 
-  --border-soft: #f0f0f0;
+  --border-subtle: #f0f0f0;
 
   --border-strong: #d4d4d4;
 
   --border-focus: var(--color-secondary-500);
 
   --border-error: var(--color-error-500);
+
+  --border-card: var(--border-subtle);
+
+  --border-input: var(--border-strong);
+
+  --border-input-focus: var(--border-focus);
+
+  --border-primary: var(--border-default);
+
+  --border-soft: var(--border-subtle);
 
   /* ============================================
      PRODUCT UI
@@ -108,6 +141,10 @@ html:not([data-theme="dark"]) {
 
   --cart-highlight: var(--color-primary-50);
 
+  --state-hover: rgba(214, 90, 140, 0.08);
+
+  --state-active: rgba(214, 90, 140, 0.16);
+
   /* ============================================
      SHADOWS
      ============================================ */
@@ -125,4 +162,8 @@ html:not([data-theme="dark"]) {
   --shadow-card: var(--shadow-sm);
 
   --shadow-modal: var(--shadow-xl);
+
+  --shadow-floating: var(--shadow-lg);
+
+  --shadow-dropdown: var(--shadow-md);
 }

@@ -3,9 +3,24 @@
  *
  * Premium Beauty Ecommerce Typography System
  *
- * Fonts:
- * EN → Inter
- * FA → IRANYekanX
+ * FONT STRATEGY
+ * -------------
+ * Font *files* are loaded by `next/font` in `src/lib/fonts.ts`, which exposes
+ * CSS variables on the <html> element:
+ *
+ *   --font-iran   → IRANYekan (self hosted, src/fonts/*.woff)
+ *   --font-inter  → Inter (optional, see src/lib/fonts.ts)
+ *
+ * This file only *composes* those variables into family stacks. Never declare
+ * @font-face here — `next/font` handles subsetting, preloading and
+ * `font-display` for us.
+ *
+ * NOTE ON ROLE TOKENS
+ * -------------------
+ * We deliberately do NOT ship composite `font:` shorthand tokens.
+ * The `font` shorthand always resets `font-family`, which would break RTL
+ * (it would force the Latin stack onto Persian text). Utilities compose
+ * `font-size` + `line-height` + `font-weight` individually instead.
  */
 
 :root {
@@ -13,17 +28,25 @@
      FONT FAMILIES
   ============================================ */
 
- --font-family-en:
-var(--font-inter),
-system-ui,
-sans-serif;
+  /* Latin stack. `--font-inter` is optional: when `next/font/google` Inter is
+     enabled it is used, otherwise we fall back to the system UI stack. */
+  --font-family-latin:
+    var(--font-inter, ""), system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 
+  /* Persian stack. `--font-iran` is provided by next/font/local. */
+  --font-family-persian:
+    var(--font-iran, ""), Tahoma, "Iranian Sans", Arial, sans-serif;
 
---font-family-fa:
-var(--font-iran),
-Tahoma,
-Arial,
-sans-serif;
+  /* Default family used by html/body. Swapped to Persian via [dir="rtl"]. */
+  --font-family-sans: var(--font-family-latin);
+
+  /* Legacy aliases — kept so older rules keep resolving. */
+  --font-family-en: var(--font-family-latin);
+  --font-family-fa: var(--font-family-persian);
+
+  --font-family-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* ============================================
      WEIGHTS
@@ -53,23 +76,38 @@ sans-serif;
   --font-heading-sm: 1.25rem;
 
   /* ============================================
+     BODY
+  ============================================ */
+
+  --font-body-lg: 1rem;
+  --font-body-md: 0.9375rem;
+  --font-body-sm: 0.875rem;
+
+  /* ============================================
+     SUPPORTING TEXT
+  ============================================ */
+
+  --font-caption: 0.75rem;
+  --font-label: 0.875rem;
+  --font-overline: 0.6875rem;
+
+  /* ============================================
      COMMERCE TYPOGRAPHY
   ============================================ */
 
   /* Product */
 
   --font-product-title: 1rem;
-
   --font-product-price: 1.125rem;
-
   --font-product-price-old: 0.875rem;
-
   --font-product-meta: 0.8125rem;
+
+  /* Generic "title" role (product cards, list rows) */
+  --font-title: var(--font-product-title);
 
   /* Cart */
 
   --font-cart-title: 1.125rem;
-
   --font-cart-total: 1.25rem;
 
   /* Checkout */
@@ -96,59 +134,25 @@ sans-serif;
 
   --font-navigation: 0.875rem;
 
-  /* Body */
-
-  --font-body-lg: 1rem;
-
-  --font-body-md: 0.9375rem;
-
-  --font-body-sm: 0.875rem;
-
   /* ============================================
      LINE HEIGHT
   ============================================ */
 
+  --line-height-none: 1;
   --line-height-tight: 1.2;
-
+  --line-height-snug: 1.35;
   --line-height-normal: 1.5;
-
   --line-height-relaxed: 1.7;
+
+  /* Persian glyphs need a little more vertical room than Latin. */
+  --line-height-persian: 1.8;
 
   /* ============================================
      LETTER SPACING
   ============================================ */
 
+  --letter-spacing-tighter: -0.02em;
+  --letter-spacing-tight: -0.01em;
   --letter-spacing-normal: 0;
-
   --letter-spacing-wide: 0.02em;
-
-  /* ============================================
-     ROLE TOKENS
-  ============================================ */
-
-  --text-display-xl: var(--font-display-xl) / var(--line-height-tight)
-    var(--font-family-sans);
-
-  --text-heading-xl: var(--font-heading-xl) / var(--line-height-tight)
-    var(--font-family-sans);
-
-  --text-body: var(--font-body-md) / var(--line-height-normal)
-    var(--font-family-sans);
-
-  /* Commerce */
-
-  --text-product-title: var(--font-product-title) / var(--line-height-normal)
-    var(--font-family-sans);
-
-  --text-product-price: var(--font-product-price) / var(--line-height-normal)
-    var(--font-family-sans);
-
-  --text-product-price-old: var(--font-product-price-old) /
-    var(--line-height-normal) var(--font-family-sans);
-
-  --text-button: var(--font-button) / var(--line-height-normal)
-    var(--font-family-sans);
-
-  --text-input: var(--font-input) / var(--line-height-normal)
-    var(--font-family-sans);
 }

@@ -113,15 +113,18 @@
    ============================================ */
 
 .backdrop-blur-sm {
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
 }
 
 .backdrop-blur-md {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
 }
 
 .backdrop-blur-lg {
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
 }
 
 /* ============================================
@@ -131,7 +134,18 @@
 .glass {
   background: color-mix(in srgb, var(--surface-card) 70%, transparent);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--blur-md));
+
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+/* Safari on iOS drops backdrop-filter under Low Power Mode; fall back to an
+   opaque surface so text never lands on unreadable transparency. */
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--surface-card);
+  }
 }
 
 /* ============================================
@@ -139,15 +153,19 @@
    ============================================ */
 
 .border {
-  border: 1px solid var(--border-primary);
+  border: var(--border-line-default);
 }
 
 .border-subtle {
-  border-color: var(--border-subtle);
+  border: var(--border-line-subtle);
 }
 
 .border-strong {
-  border-color: var(--border-strong);
+  border: var(--border-line-strong);
+}
+
+.border-none {
+  border: none;
 }
 
 /* ============================================
@@ -155,25 +173,34 @@
    ============================================ */
 
 .ring-focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-focus) 25%, transparent);
+  box-shadow: var(--theme-focus-ring);
 }
 
 /* ============================================
    TRANSFORM HELPERS
    ============================================ */
 
-.scale-hover {
-  transition: transform var(--transition-normal);
-}
+/*
+ * NOTE: `transition: transform var(--transition-normal)` was invalid —
+ * --transition-normal already expands to `all <duration> <easing>`, producing
+ * `transition: transform all 150ms ...`, which browsers discard entirely.
+ * These now declare the longhand directly.
+ */
 
-.scale-hover:hover {
-  transform: scale(1.03);
+.scale-hover {
+  transition: transform var(--motion-duration-normal) var(--motion-ease-out);
 }
 
 .translate-y-hover {
-  transition: transform var(--transition-normal);
+  transition: transform var(--motion-duration-normal) var(--motion-ease-out);
 }
 
-.translate-y-hover:hover {
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .scale-hover:hover {
+    transform: scale(1.03);
+  }
+
+  .translate-y-hover:hover {
+    transform: translateY(-4px);
+  }
 }

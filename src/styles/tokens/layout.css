@@ -1,8 +1,31 @@
 /**
  * LUMINA Design System — Layout Tokens
+ *
+ * Page gutters and shared layout rhythm.
+ * Gutters scale up with the viewport so content isn't glued to the edge on
+ * desktop while staying compact on phones.
  */
+
 :root {
-  --layout-gutter: var(--spacing-24);
-  --layout-gutter-sm: var(--spacing-16);
-  --layout-gutter-lg: var(--spacing-32);
+  --layout-gutter: var(--spacing-16);
+  --layout-gutter-sm: var(--spacing-12);
+  --layout-gutter-lg: var(--spacing-24);
+
+  --layout-header-height: 64px;
+  --layout-mobile-nav-height: 56px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --layout-gutter: var(--spacing-24);
+    --layout-gutter-lg: var(--spacing-32);
+    --layout-header-height: 72px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-gutter: var(--spacing-32);
+    --layout-gutter-lg: var(--spacing-48);
+  }
 }
