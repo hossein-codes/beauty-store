@@ -1,7 +1,8 @@
+// @ts-ignore - PrismaClient will be available after running `npm run db:generate`
 import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
+  prisma: any;
 };
 
 export const prisma =
