@@ -7,10 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check:shell": "node scripts/check-shell-css.mjs"
+    "check:shell": "node scripts/check-shell-css.mjs",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "@prisma/client": "^7.9.0",
     "date-fns": "^4.4.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.42.2",
@@ -32,7 +41,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "prisma": "^7.9.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }
