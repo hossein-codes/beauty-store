@@ -1,0 +1,178 @@
+/**
+ * LUMINA — Platform Utilities
+ *
+ * Visibility and behaviour helpers for the app/web split.
+ *
+ * WHY CLASSES INSTEAD OF JS?
+ * Rendering the mobile shell or the desktop shell based on a JS media query
+ * means the server can't know which to emit — you get a hydration mismatch, or
+ * a flash of the wrong shell. These CSS-driven utilities let BOTH shells be
+ * server-rendered, with the browser showing exactly one. No flash, no mismatch.
+ *
+ * The tradeoff (a little unused markup in the DOM) is deliberate and cheap.
+ * For genuinely heavy widgets, gate on `useBreakpoint()` instead so the work
+ * never happens — but never for layout chrome.
+ *
+ * BREAKPOINTS — must stay in sync with tokens/platform.css:
+ *   < 768px   app shell
+ *   768–1023  hybrid (tablet)
+ *   ≥ 1024px  web shell
+ */
+
+/* ============================================
+   PLATFORM VISIBILITY
+
+   `app-only`   → phones only (< 768)
+   `web-only`   → desktop only (≥ 1024)
+   `tablet-up`  → tablet and above (≥ 768)
+   `nav-app`    → wherever bottom navigation is used (< 1024, incl. tablet)
+   `nav-web`    → wherever top navigation is used (≥ 1024)
+   ============================================ */
+
+.app-only,
+.nav-app {
+  display: revert;
+}
+
+.web-only,
+.nav-web,
+.tablet-up {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .app-only {
+    display: none;
+  }
+
+  .tablet-up {
+    display: revert;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-app {
+    display: none;
+  }
+
+  .web-only,
+  .nav-web {
+    display: revert;
+  }
+}
+
+/*
+ * `display: revert` restores the element's natural display (block for div,
+ * flex for a flex container that sets its own, etc). Using `display: block`
+ * here would silently break any flex/grid element tagged with these classes.
+ *
+ * IMPORTANT: hiding with `display: none` also removes the element from the
+ * accessibility tree and tab order — which is what we want. Do NOT duplicate
+ * interactive controls across both shells without also duplicating their
+ * labels, or screen readers will announce the same action twice.
+ */
+
+/* ============================================
+   SAFE AREA HELPERS
+   ============================================ */
+
+.safe-top {
+  padding-top: var(--safe-top);
+}
+
+.safe-bottom {
+  padding-bottom: var(--safe-bottom);
+}
+
+.safe-inline {
+  padding-inline: var(--safe-start) var(--safe-end);
+}
+
+/* Full-bleed element that still respects the notch */
+.safe-area {
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  padding-inline: var(--safe-start) var(--safe-end);
+}
+
+/* ============================================
+   TOUCH BEHAVIOUR
+
+   These are what separate a "website in a WebView" from something that feels
+   native.
+   ============================================ */
+
+/* Momentum scrolling that doesn't drag the whole page with it. */
+.scroll-area {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Horizontal product rails that snap like a native carousel. */
+.snap-x {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.snap-x::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-x > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+/* Kill the blue tap flash and the 300ms delay on iOS. */
+.tappable {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* Native-feeling press feedback. Pointer devices get hover instead. */
+.tappable:active {
+  transform: scale(var(--app-tap-scale));
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+@media (hover: hover) {
+  .tappable:active {
+    transform: none;
+  }
+}
+
+/* Prevent iOS text-size inflation inside fixed app chrome. */
+.no-text-inflate {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* ============================================
+   TOUCH TARGET
+
+   Expands the hit area of a small icon button WITHOUT changing its visual
+   size, using a pseudo-element. This is how you keep a 20px icon visually
+   small but 44px tappable.
+   ============================================ */
+
+.hit-area {
+  position: relative;
+}
+
+.hit-area::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  width: 100%;
+  height: 100%;
+}

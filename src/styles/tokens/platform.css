@@ -1,0 +1,159 @@
+/**
+ * LUMINA Design System — Platform Tokens
+ *
+ * ══════════════════════════════════════════════════════════════════════
+ * THE CORE RULE OF THIS PROJECT
+ *
+ * Mobile is NOT "desktop, but narrower". Mobile is an APP:
+ *   - fixed bottom tab bar          - compact app header with back button
+ *   - full-height sheets, not modals - edge-to-edge content
+ *   - safe-area aware               - no hover affordances
+ *
+ * Desktop is a WEBSITE:
+ *   - top navigation + mega menu    - centered max-width container
+ *   - hover states                  - multi-column grids, sidebars
+ *
+ * These are two different layouts sharing ONE token system, so that when the
+ * native app is built it looks identical to the mobile web app.
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ * BREAKPOINT CONTRACT
+ *
+ *   < 768px   → APP SHELL      (phone; also the native app's target)
+ *   768–1023  → HYBRID         (tablet: desktop grid + bottom nav)
+ *   ≥ 1024px  → WEB SHELL      (desktop)
+ *
+ * Use the `app-only` / `desktop-only` utilities (utilities/platform.css)
+ * instead of re-deriving these numbers in component CSS.
+ */
+
+:root {
+  /* ============================================
+     SAFE AREAS
+
+     iOS notch / home indicator, Android gesture bar. `env()` returns 0 in
+     browsers that don't support it, so these are always safe to add.
+     In a Capacitor/WebView build these become non-zero automatically —
+     which is exactly why every fixed element below must use them.
+     ============================================ */
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-start: env(safe-area-inset-left, 0px);
+  --safe-end: env(safe-area-inset-right, 0px);
+
+  /* ============================================
+     APP CHROME HEIGHTS
+
+     Fixed bars must reserve space in the scroll container, otherwise content
+     hides underneath them. Every value here is consumed by `.app-content`
+     padding, so changing a bar height never requires touching a page.
+     ============================================ */
+
+  /* Mobile app header (title + back/actions) */
+  --app-header-height: 56px;
+
+  /* Mobile bottom tab bar (the "native" navigation) */
+  --app-tabbar-height: 60px;
+
+  /* Total space a fixed bar occupies including its safe area */
+  --app-header-total: calc(var(--app-header-height) + var(--safe-top));
+  --app-tabbar-total: calc(var(--app-tabbar-height) + var(--safe-bottom));
+
+  /* Desktop web header */
+  --web-header-height: 72px;
+
+  /* Optional desktop announcement/top strip */
+  --web-topbar-height: 40px;
+
+  /* ============================================
+     TOUCH TARGETS
+
+     Apple HIG: 44pt. Material: 48dp. We take the larger for primary actions
+     so the same component satisfies both platforms' review guidelines.
+     ============================================ */
+
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+
+  /* ============================================
+     APP MOTION
+
+     Native-feeling transitions. Sheets and page pushes use a decelerating
+     curve; taps use a short scale. Deliberately faster than web defaults —
+     sluggish transitions are the main thing that makes a WebView feel "not
+     native".
+     ============================================ */
+
+  --app-sheet-duration: 260ms;
+  --app-sheet-ease: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --app-push-duration: 300ms;
+  --app-push-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --app-tap-scale: 0.97;
+
+  /* ============================================
+     APP SURFACES / RADII
+
+     Sheets are rounded only on the leading edge; cards are flatter on mobile
+     than on desktop because they sit edge-to-edge.
+     ============================================ */
+
+  --app-sheet-radius: var(--radius-2xl);
+  --app-card-radius: var(--radius-lg);
+
+  /* Elevation for fixed chrome — subtle, sits above content */
+  --app-chrome-shadow: 0 -1px 0 var(--border-subtle);
+  --web-chrome-shadow: 0 1px 0 var(--border-subtle);
+
+  /* ============================================
+     CONTENT GUTTERS PER PLATFORM
+
+     Mobile uses tighter gutters so product grids get maximum width.
+     ============================================ */
+
+  --gutter-app: var(--spacing-16);
+  --gutter-web: var(--spacing-24);
+}
+
+/* ============================================
+   TABLET (hybrid)
+   Desktop-ish grid, but still app navigation.
+   ============================================ */
+
+@media (min-width: 768px) {
+  :root {
+    --gutter-app: var(--spacing-24);
+    --app-header-height: 60px;
+  }
+}
+
+/* ============================================
+   DESKTOP
+   ============================================ */
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter-web: var(--spacing-32);
+  }
+}
+
+/* ============================================
+   STANDALONE / NATIVE DISPLAY MODE
+
+   When installed as a PWA or running inside a WebView there is no browser
+   URL bar, so the app header becomes the topmost UI and needs the status bar
+   inset baked in. `display-mode: standalone` covers installed PWAs;
+   `[data-native]` is set by the native wrapper (Capacitor) for the rest.
+   ============================================ */
+
+@media (display-mode: standalone) {
+  :root {
+    --app-is-standalone: 1;
+  }
+}
+
+html[data-native="true"] {
+  --app-is-standalone: 1;
+}

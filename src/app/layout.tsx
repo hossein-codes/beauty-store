@@ -33,7 +33,15 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  /*
+   * `viewportFit: "cover"` is what makes `env(safe-area-inset-*)` return real
+   * values on notched devices. Without it the safe-area tokens are always 0
+   * and fixed chrome renders under the notch / home indicator.
+   */
   viewportFit: "cover",
+  /* Keep the layout viewport stable when the mobile keyboard opens, so a
+     fixed bottom tab bar doesn't get shoved up over the content. */
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#faf9f8" },
     { media: "(prefers-color-scheme: dark)", color: "#121111" },
@@ -66,7 +74,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Keyboard users land here first — styled in base/accessibility.css */}
+        {/* Keyboard users land here first. AppShell renders #main-content. */}
         <a className="skip-link" href="#main-content">
           رفتن به محتوای اصلی
         </a>

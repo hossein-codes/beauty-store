@@ -43,6 +43,7 @@
 @import "./tokens/containers.css";
 @import "./tokens/icons.css";
 @import "./tokens/blur.css";
+@import "./tokens/platform.css";
 
 /* 3 — THEMES (must come after tokens, before base) */
 @import "./themes/theme.css";
@@ -58,8 +59,11 @@
    shipped CSS. */
 @import "./utilities.css";
 
-/* 6 — LAYOUTS */
+/* 6 — LAYOUTS + SHELLS
+   shells.css owns the app-vs-web structural split (fixed mobile chrome vs
+   sticky desktop header). See tokens/platform.css for the breakpoint contract. */
 @import "./layouts.css";
+@import "./shells.css";
 
 /* 7 — COMMERCE */
 @import "./commerce.css";
