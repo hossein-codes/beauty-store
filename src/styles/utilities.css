@@ -88,3 +88,9 @@
    ============================================ */
 
 @import "./utilities/effects.css";
+
+/* ============================================
+   PLATFORM (app vs web visibility, safe areas, touch)
+   ============================================ */
+
+@import "./utilities/platform.css";

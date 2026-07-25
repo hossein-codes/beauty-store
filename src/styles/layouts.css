@@ -122,21 +122,19 @@
 
 /* ============================================
    MOBILE APP LAYOUT
+
+   REMOVED — superseded by `styles/shells.css`.
+
+   `.app-shell` is now `.shell`, and `.app-content` is owned by shells.css
+   where it reserves space for the fixed header/tab bar.
+
+   The old `.app-content { overflow-y: auto }` defined here was actively
+   harmful: it made the content an internal scroll container, which breaks
+   mobile URL-bar hide/show, scroll restoration on back-navigation, and any
+   `position: sticky` inside a page. It also collided by name with the shells
+   rule and, being imported first, was silently overridden — leaving dead CSS
+   that only surfaced as a scrolling bug on real devices.
    ============================================ */
-
-.app-shell {
-  min-height: 100dvh;
-
-  display: flex;
-
-  flex-direction: column;
-}
-
-.app-content {
-  flex: 1;
-
-  overflow-y: auto;
-}
 
 /* ============================================
    COMMON STACK PATTERNS

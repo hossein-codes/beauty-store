@@ -294,3 +294,81 @@
 
   animation: pulse 1.5s var(--motion-ease-in-out) infinite;
 }
+
+/* ============================================
+   PRODUCT RAIL
+
+   The clearest expression of the app/web split:
+
+   MOBILE  → horizontally snapping carousel. Native shopping apps present
+             collections this way; vertical space is scarce and swiping is
+             the natural gesture.
+   DESKTOP → wrapping grid. Horizontal scrolling with a mouse is hostile.
+
+   Same markup, same data — only the container's layout changes.
+   ============================================ */
+
+.rail {
+  display: flex;
+
+  gap: var(--spacing-12);
+
+  overflow-x: auto;
+
+  scroll-snap-type: x mandatory;
+
+  overscroll-behavior-x: contain;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+
+  /* Bleed to the screen edges so cards scroll out under the gutter, the way
+     native rails do — then pad the ends back so the first/last card aligns
+     with the page content. */
+  margin-inline: calc(-1 * var(--gutter-app));
+
+  padding-inline: var(--gutter-app);
+
+  /* Room for the hover-lift / focus ring not to be clipped. */
+  padding-block: var(--spacing-4);
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-item {
+  scroll-snap-align: start;
+
+  /* Two-and-a-bit cards visible — the peek signals "there's more". */
+  flex: 0 0 clamp(9rem, 42vw, 12rem);
+}
+
+@media (min-width: 768px) {
+  .rail-item {
+    flex-basis: clamp(11rem, 28vw, 14rem);
+  }
+}
+
+/* Desktop: become a grid. */
+
+@media (min-width: 1024px) {
+  .rail {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+    gap: var(--spacing-24);
+
+    overflow-x: visible;
+
+    margin-inline: 0;
+
+    padding-inline: 0;
+  }
+
+  .rail-item {
+    flex-basis: auto;
+  }
+}

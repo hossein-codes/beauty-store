@@ -1,0 +1,479 @@
+/**
+ * LUMINA Design System — Application Shells
+ *
+ * The two structural layouts of the product.
+ *
+ * ┌─ APP SHELL (< 1024px) ──────────┐   ┌─ WEB SHELL (≥ 1024px) ─────────┐
+ * │ ▓▓▓ fixed app header (safe-top) │   │ ▓▓▓ sticky web header          │
+ * │                                 │   │                                │
+ * │      scrollable content         │   │   centered max-width content   │
+ * │                                 │   │                                │
+ * │ ▓▓▓ fixed tab bar (safe-bottom) │   │      footer (in flow)          │
+ * └─────────────────────────────────┘   └────────────────────────────────┘
+ *
+ * KEY DIFFERENCE
+ * On mobile the chrome is FIXED and the content scrolls beneath it — that's
+ * what makes it feel like an app. On desktop everything is in normal document
+ * flow with a sticky header.
+ *
+ * The fixed bars are laid out with `position: fixed` rather than a flex
+ * column with an internal scroller, because an internal scroller breaks:
+ *   - the mobile URL-bar hide/show gesture
+ *   - scroll restoration on back-navigation
+ *   - `position: sticky` inside the content
+ * Instead we reserve space with padding on `.app-content`.
+ */
+
+/* ============================================
+   ROOT SHELL
+   ============================================ */
+
+.shell {
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════════════════
+   ⚠️  CASCADE NOTE — why the shells hide themselves
+
+   The `.nav-app` / `.nav-web` utilities in utilities/platform.css also set
+   `display`, but utilities are imported BEFORE this file. Since
+   `.nav-app` and `.app-tabbar` have identical specificity (0-1-0), the later
+   rule wins — so `.app-tabbar { display: flex }` here would override
+   `.nav-app { display: none }` and the tab bar would appear on desktop.
+
+   Rather than fight that with !important or an artificial specificity bump,
+   each shell element declares its own breakpoint visibility below. The
+   `.nav-app` / `.nav-web` classes remain on the elements as semantic markers
+   (and for content that isn't shell chrome), but the authoritative rules are
+   these.
+   ══════════════════════════════════════════════ */
+
+/* ============================================
+   APP HEADER (mobile / tablet)
+   ============================================ */
+
+.app-header {
+  position: fixed;
+
+  top: 0;
+
+  inset-inline: 0;
+
+  z-index: var(--z-header);
+
+  /* Content sits below the status bar inset. */
+  padding-top: var(--safe-top);
+
+  padding-inline: var(--gutter-app);
+
+  height: var(--app-header-total);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--spacing-12);
+
+  background: var(--surface-navbar);
+
+  backdrop-filter: blur(var(--blur-lg));
+
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+
+  box-shadow: var(--web-chrome-shadow);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .app-header {
+    background: var(--surface-primary);
+  }
+}
+
+/* Desktop uses .web-header instead. */
+
+@media (min-width: 1024px) {
+  .app-header {
+    display: none;
+  }
+}
+
+.app-header-title {
+  flex: 1;
+
+  font-size: var(--font-body-lg);
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--text-primary);
+
+  text-align: center;
+
+  /* Long product names must not push the action buttons off-screen. */
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* ============================================
+   BOTTOM TAB BAR (mobile / tablet)
+
+   The single most "native" element. Fixed, safe-area aware, and always
+   reachable with a thumb.
+   ============================================ */
+
+.app-tabbar {
+  position: fixed;
+
+  bottom: 0;
+
+  inset-inline: 0;
+
+  z-index: var(--z-header);
+
+  /* Bar sits above the home indicator. */
+  padding-bottom: var(--safe-bottom);
+
+  height: var(--app-tabbar-total);
+
+  display: flex;
+
+  align-items: stretch;
+
+  background: var(--surface-navbar);
+
+  backdrop-filter: blur(var(--blur-lg));
+
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+
+  box-shadow: var(--app-chrome-shadow);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .app-tabbar {
+    background: var(--surface-primary);
+  }
+}
+
+/* Desktop navigates from the top header. */
+
+@media (min-width: 1024px) {
+  .app-tabbar {
+    display: none;
+  }
+}
+
+.app-tab {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: var(--spacing-4);
+
+  min-height: var(--touch-target-min);
+
+  font-size: var(--font-caption);
+
+  color: var(--text-muted);
+
+  -webkit-tap-highlight-color: transparent;
+
+  touch-action: manipulation;
+
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.app-tab[aria-current="page"] {
+  color: var(--color-primary);
+
+  font-weight: var(--font-weight-medium);
+}
+
+.app-tab:active {
+  opacity: var(--opacity-hover);
+}
+
+/* Cart/notification count bubble on a tab icon */
+.app-tab-badge {
+  position: absolute;
+
+  top: -4px;
+
+  inset-inline-end: -8px;
+
+  min-width: 18px;
+
+  height: 18px;
+
+  padding-inline: 4px;
+
+  display: grid;
+
+  place-items: center;
+
+  font-size: 0.625rem;
+
+  font-weight: var(--font-weight-bold);
+
+  color: var(--text-inverse);
+
+  background: var(--color-primary);
+
+  border-radius: var(--radius-full);
+}
+
+.app-tab-icon {
+  position: relative;
+
+  display: grid;
+
+  place-items: center;
+}
+
+/* ============================================
+   WEB HEADER (desktop)
+   ============================================ */
+
+.web-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: var(--z-header);
+
+  height: var(--web-header-height);
+
+  /* Hidden by default (mobile-first); revealed at the desktop breakpoint. */
+  display: none;
+
+  align-items: center;
+
+  gap: var(--spacing-32);
+
+  padding-inline: var(--gutter-web);
+
+  background: var(--surface-navbar);
+
+  backdrop-filter: blur(var(--blur-lg));
+
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+
+  box-shadow: var(--web-chrome-shadow);
+}
+
+@media (min-width: 1024px) {
+  .web-header {
+    display: flex;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .web-header {
+    background: var(--surface-primary);
+  }
+}
+
+/* ============================================
+   CONTENT AREA
+
+   Reserves room for whichever chrome is currently fixed. This is the piece
+   that keeps content from hiding under the bars.
+   ============================================ */
+
+.app-content {
+  flex: 1;
+
+  /* Space for the fixed header + tab bar (mobile/tablet). */
+  padding-top: var(--app-header-total);
+
+  padding-bottom: var(--app-tabbar-total);
+
+  /* Horizontal safe area matters in landscape on notched phones. */
+  padding-inline: var(--safe-start) var(--safe-end);
+}
+
+@media (min-width: 1024px) {
+  .app-content {
+    /* Desktop header is sticky (in flow), so no top padding is needed, and
+       there is no bottom tab bar. */
+    padding-top: 0;
+
+    padding-bottom: 0;
+  }
+}
+
+/* ============================================
+   PAGE CONTAINER PER PLATFORM
+   ============================================ */
+
+.shell-container {
+  width: 100%;
+
+  padding-inline: var(--gutter-app);
+}
+
+@media (min-width: 1024px) {
+  .shell-container {
+    max-width: var(--container-commerce);
+
+    margin-inline: auto;
+
+    padding-inline: var(--gutter-web);
+  }
+}
+
+/* ============================================
+   BOTTOM SHEET (mobile modal replacement)
+
+   On mobile, a centered dialog feels like the web. A sheet that slides up
+   from the bottom edge feels like an app. Same component, different
+   presentation per platform.
+   ============================================ */
+
+.sheet {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: var(--z-modal);
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+}
+
+.sheet-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background: var(--surface-overlay);
+
+  animation: fadeIn var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+.sheet-panel {
+  position: relative;
+
+  width: 100%;
+
+  max-height: 90dvh;
+
+  /* Clear the home indicator. */
+  padding-bottom: var(--safe-bottom);
+
+  background: var(--surface-modal);
+
+  /* Rounded on the top edge only — the bottom is flush with the screen. */
+  border-start-start-radius: var(--app-sheet-radius);
+
+  border-start-end-radius: var(--app-sheet-radius);
+
+  box-shadow: var(--shadow-modal);
+
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  animation: sheetUp var(--app-sheet-duration) var(--app-sheet-ease);
+}
+
+/* The little grab handle that signals "you can drag this". */
+.sheet-handle {
+  width: 36px;
+
+  height: 4px;
+
+  margin: var(--spacing-12) auto;
+
+  background: var(--border-strong);
+
+  border-radius: var(--radius-full);
+}
+
+@keyframes sheetUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* On desktop the same markup becomes a centered dialog. */
+@media (min-width: 1024px) {
+  .sheet {
+    align-items: center;
+  }
+
+  .sheet-panel {
+    max-width: var(--container-lg);
+
+    max-height: 85dvh;
+
+    padding-bottom: 0;
+
+    border-radius: var(--radius-modal);
+
+    animation: scaleIn var(--motion-duration-normal) var(--motion-ease-out);
+  }
+
+  .sheet-handle {
+    display: none;
+  }
+}
+
+/* ============================================
+   MOBILE STICKY ACTION BAR
+
+   The "Add to cart" bar pinned above the tab bar on product pages.
+   ============================================ */
+
+.action-bar {
+  position: fixed;
+
+  inset-inline: 0;
+
+  /* Sits directly on top of the tab bar. */
+  bottom: var(--app-tabbar-total);
+
+  z-index: var(--z-sticky);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--spacing-12);
+
+  padding: var(--spacing-12) var(--gutter-app);
+
+  background: var(--surface-primary);
+
+  box-shadow: var(--app-chrome-shadow);
+}
+
+@media (min-width: 1024px) {
+  .action-bar {
+    position: static;
+
+    padding-inline: 0;
+
+    background: none;
+
+    box-shadow: none;
+  }
+}
