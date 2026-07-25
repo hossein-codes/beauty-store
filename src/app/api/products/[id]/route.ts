@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+
+export const dynamic = 'force-dynamic';
+
+async function getPrisma() {
+  const { prisma } = await import('@/lib/prisma');
+  return prisma;
+}
 
 export async function GET(
   request: Request,
@@ -8,6 +14,7 @@ export async function GET(
   const { id } = await params;
 
   try {
+    const prisma = await getPrisma();
     const product = await prisma.product.findUnique({
       where: { id: parseInt(id) },
     });
@@ -37,6 +44,7 @@ export async function PATCH(
 
   try {
     const body = await request.json();
+    const prisma = await getPrisma();
 
     const product = await prisma.product.update({
       where: { id: parseInt(id) },
@@ -60,6 +68,7 @@ export async function DELETE(
   const { id } = await params;
 
   try {
+    const prisma = await getPrisma();
     await prisma.product.delete({
       where: { id: parseInt(id) },
     });

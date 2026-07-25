@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+
+export const dynamic = 'force-dynamic';
+
+async function getPrisma() {
+  const { prisma } = await import('@/lib/prisma');
+  return prisma;
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,6 +14,8 @@ export async function GET(request: Request) {
   const search = searchParams.get('search');
 
   try {
+    const prisma = await getPrisma();
+
     const where: any = {};
 
     if (category) {
@@ -45,6 +53,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const prisma = await getPrisma();
 
     const product = await prisma.product.create({
       data: {
